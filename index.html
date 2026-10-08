@@ -13,7 +13,7 @@
 :root{
   --bg:#F4F5F2; --surface:#FFFFFF; --ink:#16232A; --muted:#58656C; --line:#D9DED9; --soft:#E9EDEA;
   --accent:#1D5868; --accent-soft:#DDEAEC;
-  --f-perf:#8A5526; --f-redes:#2C6B55; --f-ps:#1D5868; --f-series:#963A47; --f-reg:#4A5A8A;
+  --f-perf:#8A5526; --f-redes:#2C6B55; --f-ps:#1D5868; --f-series:#963A47; --f-reg:#4A5A8A; --f-exp:#7A5A8C;
   --f-display:"Source Serif 4", Georgia, "Times New Roman", serif;
   --f-body:"Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -22,14 +22,14 @@
   :root:not([data-theme="light"]){
     --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
     --accent:#7FC0CF; --accent-soft:#1C3A42;
-    --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
+    --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0; --f-exp:#C7A9DE;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
   --accent:#7FC0CF; --accent-soft:#1C3A42;
-  --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
+  --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0; --f-exp:#C7A9DE;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -92,9 +92,11 @@ dl.meta dd{margin:0; min-width:0}
 .methods li{font-size:12.5px; background:var(--soft); color:var(--ink); padding:3px 8px; border-radius:3px}
 .result{border-left:3px solid var(--accent); background:var(--accent-soft); padding:10px 12px; font-size:14px; font-variant-numeric:tabular-nums}
 .result b{font-family:var(--f-mono); font-weight:500; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; display:block; color:var(--muted); margin-bottom:2px}
+.doi{font-family:var(--f-mono); font-size:13px}
 .foot{margin-top:auto; padding-top:12px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; font-size:13px; color:var(--muted)}
 .foot .status{color:var(--ink)}
 .foot .status.live::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--f-series); margin-right:6px; vertical-align:1px}
+.foot .status.pub::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-right:6px; vertical-align:1px}
 .foot .status.sent::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--f-redes); margin-right:6px; vertical-align:1px}
 
 /* Herramientas y contacto */
@@ -128,9 +130,10 @@ dl.meta dd{margin:0; min-width:0}
       <p class="bio">Licenciado en Biología (PUCV), con especialización doctoral en Epidemiología y Diplomado en Bioestadística y Métodos de Investigación (UNAB). Trabajo con encuestas poblacionales, registros de cáncer y bases administrativas de salud de Chile, con foco en calidad de vida, métodos multivariados y medicina basada en evidencia.</p>
     </div>
     <dl class="facts">
-      <div><dt>Análisis en este portafolio</dt><dd>18</dd></div>
-      <div><dt>Fuentes de datos</dt><dd>9</dd></div>
-      <div><dt>Familias de métodos</dt><dd>5</dd></div>
+      <div><dt>Análisis en este portafolio</dt><dd>24</dd></div>
+      <div><dt>Artículos publicados</dt><dd>7</dd></div>
+      <div><dt>Fuentes de datos</dt><dd>11</dd></div>
+      <div><dt>Familias de métodos</dt><dd>6</dd></div>
       <div><dt>Software</dt><dd>Python · R · Stata</dd></div>
       <div><dt>ORCID</dt><dd><a href="https://orcid.org/0000-0002-7765-6388" target="_blank" rel="noopener">0000-0002-7765-6388</a></dd></div>
     </dl>
@@ -183,7 +186,7 @@ dl.meta dd{margin:0; min-width:0}
       <div><span>ResearchGate</span><a class="val" href="https://www.researchgate.net/profile/Carlos-Gonzalez-Torres-3" target="_blank" rel="noopener">researchgate.net/profile/Carlos-Gonzalez-Torres-3</a></div>
       <div><span>Afiliación</span><span>Programa de Doctorado en Ciencias e Ingeniería para la Salud, Universidad de Valparaíso, Valparaíso, Chile</span></div>
     </div>
-    <p class="disclaimer">Varios análisis corresponden a manuscritos en preparación o en evaluación; sus cifras son preliminares y pueden cambiar tras la revisión por pares. Todos los análisis son secundarios y observacionales, en su mayoría transversales, sobre bases públicas o institucionales: describen asociaciones y no permiten establecer causalidad. El ajuste por puntaje de propensión reduce la confusión medida, pero no la no medida.</p>
+    <p class="disclaimer">Varios análisis corresponden a manuscritos en preparación o en evaluación; sus cifras son preliminares y pueden cambiar tras la revisión por pares. Las cifras de los artículos publicados provienen de sus resúmenes indexados. Todos los análisis son secundarios y observacionales, en su mayoría transversales, sobre bases públicas o institucionales: describen asociaciones y no permiten establecer causalidad. El ajuste por puntaje de propensión reduce la confusión medida, pero no la no medida.</p>
   </section>
 </div>
 
@@ -193,7 +196,8 @@ const FAM = {
   redes:{label:"Modelos de red", short:"Redes", color:"var(--f-redes)"},
   ps:{label:"Ajuste por puntaje de propensión", short:"Propensión", color:"var(--f-ps)"},
   series:{label:"Series temporales y tendencias", short:"Series", color:"var(--f-series)"},
-  reg:{label:"Regresión con encuestas", short:"Regresión", color:"var(--f-reg)"}
+  reg:{label:"Modelos de regresión", short:"Regresión", color:"var(--f-reg)"},
+  exp:{label:"Morfometría experimental", short:"Experimental", color:"var(--f-exp)"}
 };
 const SRC = [
   {id:"rpc", name:"Registro Poblacional de Cáncer", note:"MINSAL, 1998-2019"},
@@ -201,12 +205,48 @@ const SRC = [
   {id:"msk", name:"MSK-IMPACT 50K", note:"cBioPortal"},
   {id:"urg", name:"Atenciones de urgencia", note:"DEIS, 2025"},
   {id:"egr", name:"Egresos hospitalarios", note:"DEIS, 2005-2025"},
-  {id:"encavi", name:"ENCAVI", note:"MINSAL, 2023-2024"},
-  {id:"ebs", name:"Encuesta de Bienestar Social", note:"2025"},
+  {id:"encavi", name:"ENCAVI", note:"MINSAL, 2015-2016 y 2023-2024"},
+  {id:"ebs", name:"Encuesta de Bienestar Social", note:"2021, 2023 y 2025"},
   {id:"casen", name:"Casen", note:"2024"},
-  {id:"enssex", name:"ENSSEX", note:"2022-2023"}
+  {id:"enssex", name:"ENSSEX", note:"2022-2023"},
+  {id:"docentes", name:"Docentes escolares", note:"Datos primarios"},
+  {id:"pm25", name:"Modelo experimental en ratas", note:"PM2,5 de humo de leña"}
 ];
 const A = [
+ {src:"ebs", fam:["reg"], t:"Actividad física, visitas a áreas verdes y distrés psicológico",
+  base:"Encuesta de Bienestar Social 2023",
+  d:"Análisis secundario de la encuesta nacional sobre la relación del cumplimiento de la recomendación de actividad física y la visita a áreas verdes con el distrés psicológico en adultos chilenos.",
+  m:["Análisis secundario de encuesta nacional"],
+  au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", st:"Publicado en Journal of Movement & Health (2026)", stc:"pub", y:2026.06},
+ {src:"ebs", fam:["reg"], t:"Obesidad y distrés psicológico durante la pandemia de COVID-19",
+  base:"Encuesta de Bienestar Social 2021", n:"10.395 personas",
+  d:"Modelos de regresión logística en ambas direcciones para explorar una posible relación bidireccional entre obesidad y distrés psicológico grave.",
+  m:["Regresión logística","Modelos en ambas direcciones","Prevalencias por sexo"],
+  r:"La obesidad se asoció con distrés psicológico grave (OR 1,3; IC 95 %: 1,05 a 1,60) y el distrés grave con obesidad (OR 1,4; 1,19 a 1,71). Ambas condiciones fueron más prevalentes en mujeres (31,9 % y 7,7 %).",
+  au:"Primer autor (con L. Lera y P. A. Lizana)", doi:"10.1371/journal.pone.0333697", st:"Publicado en PLOS ONE (2025)", stc:"pub", y:2025.11},
+ {src:"pm25", fam:["exp"], t:"Cambios renales y suprarrenales por PM2,5 de humo de leña en ratas gestantes",
+  base:"Ratas Sprague-Dawley expuestas en Temuco, en cámaras con aire filtrado y sin filtrar",
+  d:"Exposición crónica en los períodos pregestacional y gestacional, con análisis histológico y estereológico de riñón y glándula suprarrenal mediante muestreo sistemático.",
+  m:["Estereología","Muestreo sistemático","STEPanizer","Histología"],
+  r:"Cambios en la compactación glomerular, los túbulos contorneados proximales, los radios medulares y la zona fasciculada suprarrenal, más marcados con aire sin filtrar en ambos períodos.",
+  au:"Tercer autor", doi:"10.14670/HH-18-863", st:"Publicado en Histology and Histopathology (2024)", stc:"pub", y:2024.12},
+ {src:"encavi", fam:["reg"], t:"Infraestructura barrial, percepción del vecindario y calidad de vida",
+  base:"ENCAVI 2015-2016", n:"6.204 personas (de una base de 7.041)",
+  d:"Nueve elementos de infraestructura del barrio (áreas verdes, recintos deportivos, espacios recreativos, comercio, iluminación, pavimentación, transporte público, servicios de salud y saneamiento, y limpieza) y percepciones de seguridad, evaluación, comodidad y pertenencia, en relación con los componentes físico y mental del SF-12.",
+  m:["Regresión logística","Selección por pasos hacia atrás","SF-12 (componentes físico y mental)"],
+  au:"Primer autor (con P. A. Lizana)", doi:"10.1016/j.cities.2024.105128", st:"Publicado en Cities (2024)", stc:"pub", y:2024.09},
+ {src:"docentes", fam:["reg"], t:"Trastornos musculoesqueléticos y calidad de vida en docentes durante la pandemia",
+  base:"Estudio transversal en docentes escolares chilenos al cierre del año académico", n:"161 docentes",
+  d:"Prevalencia de trastornos musculoesqueléticos con el Cuestionario Nórdico Estandarizado y calidad de vida con el SF-12, con regresión logística ajustada por género, edad y tipo de contrato.",
+  m:["Cuestionario Nórdico","SF-12","Regresión logística ajustada"],
+  r:"El 98 % refirió algún trastorno en los últimos 12 meses y el 64 %, seis o más regiones dolorosas. Tener más trastornos (≥ p50) se asoció con puntajes bajos en los componentes físico (OR 2,16) y mental (OR 4,86).",
+  au:"Segundo autor", doi:"10.3389/fpubh.2024.1277578", st:"Publicado en Frontiers in Public Health (2024)", stc:"pub", y:2024.05},
+ {src:"encavi", fam:["reg"], t:"Inactividad física, conducta sedentaria y calidad de vida",
+  base:"ENCAVI 2015-2016", n:"6.261 personas",
+  d:"Inactividad física en dos umbrales de intensidad y conducta sedentaria (percentil 75), en relación con los componentes físico y mental del SF-12, con ajuste por variables sociodemográficas.",
+  m:["Tablas de contingencia","Regresión logística ajustada","SF-12"],
+  r:"Cerca del 84 % y 83 % presentó inactividad física según cada umbral y el 47 %, conducta sedentaria moderada a alta. Ambas se asociaron con mayor probabilidad de puntajes bajos de calidad de vida (OR entre 1,19 y 1,94).",
+  au:"Primer autor (con T. Yuing, F. Berral-de la Rosa y P. A. Lizana)", doi:"10.3390/healthcare11071020", st:"Publicado en Healthcare (2023)", stc:"pub", y:2023.04},
  {src:"rpc", fam:["perf"], t:"Perfiles de casos incidentes en el Registro Poblacional de Cáncer",
   base:"Registro Poblacional de Cáncer (MINSAL), seis registros regionales, 1998-2019", n:"80.890 casos incidentes",
   d:"Reducción de dimensionalidad de datos mixtos y agrupamiento para describir perfiles de casos. Se evaluó k = 2 a 8 con índices de validación interna y se caracterizaron los conglomerados con tamaños de efecto.",
@@ -272,7 +312,7 @@ const A = [
   d:"Exposición IPAQ en tres niveles y cuatro modelos, uno por dominio del WHOQOL-BREF, ajustados por variables sociodemográficas y de salud, con análisis estratificados por sexo, edad e ingreso. Las covariables de ajuste se organizaron en un diagrama (DAGitty).",
   m:["Regresión lineal multivariada","Errores estándar robustos","Medias ajustadas (margins)"],
   r:"Distribución de la exposición: 57,4 % inactivo, 28,9 % mínimamente activo y 13,7 % activo HEPA.",
-  sw:"Stata 18", st:"Manuscrito y póster A0", g:"STROBE"},
+  sw:"Stata 18", g:"STROBE", au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", st:"Publicado en Journal of Movement & Health (2026)", stc:"pub", y:2026.09},
  {src:"encavi", fam:["ps"], t:"Actividad física HEPA y calidad de vida: asociación ajustada por puntaje de propensión",
   base:"ENCAVI", n:"6.755 casos completos · 2.110 pares emparejados",
   d:"Contraste entre activos HEPA y mínimamente activos, excluyendo a los inactivos, sobre los cuatro dominios del WHOQOL-BREF.",
@@ -313,7 +353,8 @@ const A = [
   sw:"Python (implementación propia)", st:"Enviado a la Revista Chilena de Salud Pública", stc:"sent", g:"STROBE"}
 ];
 
-const state = {fam:null, src:null};
+A.sort((a,b) => (b.stc === "pub" ? b.y : 0) - (a.stc === "pub" ? a.y : 0));
+const state = {fam:null, src:null, pub:false};
 const grid = document.getElementById("grid");
 const filters = document.getElementById("filters");
 const matrix = document.getElementById("matrix");
@@ -337,8 +378,9 @@ function renderMatrix(){
 }
 
 function renderFilters(){
-  let h = `<span class="lbl">Métodos</span><button class="chip" type="button" data-f="" aria-pressed="${!state.fam && !state.src}">Todos</button>`;
+  let h = `<span class="lbl">Métodos</span><button class="chip" type="button" data-f="" aria-pressed="${!state.fam && !state.src && !state.pub}">Todos</button>`;
   for (const k in FAM) h += `<button class="chip" type="button" data-f="${k}" aria-pressed="${state.fam === k}"><span class="dot" style="background:${FAM[k].color}"></span>${FAM[k].label}</button>`;
+  h += `<button class="chip" type="button" data-pub="1" aria-pressed="${state.pub}">Solo publicados</button>`;
   const shown = visible().length;
   const srcTxt = state.src ? ` · ${esc(srcName(state.src))}` : "";
   h += `<span class="count" aria-live="polite">${shown} de ${A.length}${srcTxt}</span>`;
@@ -346,7 +388,7 @@ function renderFilters(){
 }
 
 function visible(){
-  return A.map((a,i) => ({...a, i})).filter(a => (!state.fam || a.fam.includes(state.fam)) && (!state.src || a.src === state.src));
+  return A.map((a,i) => ({...a, i})).filter(a => (!state.fam || a.fam.includes(state.fam)) && (!state.src || a.src === state.src) && (!state.pub || a.stc === "pub"));
 }
 
 function renderCards(){
@@ -360,12 +402,13 @@ function renderCards(){
       <dl class="meta">
         <dt>Base</dt><dd>${esc(a.base)}</dd>
         ${a.n ? `<dt>n</dt><dd>${esc(a.n)}</dd>` : ""}
+        ${a.au ? `<dt>Autoría</dt><dd>${esc(a.au)}</dd>` : ""}
       </dl>
       <p>${esc(a.d)}</p>
       <ul class="methods">${a.m.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
       ${a.r ? `<div class="result"><b>Hallazgo principal</b>${esc(a.r)}</div>` : ""}
       <div class="foot">
-        <span>${esc(a.sw)}${a.g ? " · " + esc(a.g) : ""}</span>
+        <span>${a.doi ? `<a class="doi" href="https://doi.org/${esc(a.doi)}" target="_blank" rel="noopener">doi.org/${esc(a.doi)}</a>` : esc([a.sw, a.g].filter(Boolean).join(" · "))}</span>
         <span class="status ${a.stc || ""}">${esc(a.st)}</span>
       </div>
     </article>`).join("");
@@ -374,8 +417,10 @@ function renderCards(){
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
 
 filters.addEventListener("click", e => {
+  const pb = e.target.closest("button[data-pub]");
+  if (pb){ state.pub = !state.pub; render(); return; }
   const b = e.target.closest("button[data-f]"); if (!b) return;
-  state.fam = b.dataset.f || null; state.src = null; render();
+  state.fam = b.dataset.f || null; state.src = null; if (!b.dataset.f) state.pub = false; render();
 });
 matrix.addEventListener("click", e => {
   const b = e.target.closest("button[data-f]"); if (!b) return;
