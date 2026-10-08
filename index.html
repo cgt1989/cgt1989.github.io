@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portafolio de análisis epidemiológicos y bioestadísticos de Carlos González-Torres.">
+<title>Carlos González-Torres · Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: ficha de investigador; encabezado sobrio, matriz fuente × método como índice, catálogo de fichas filtrable */
+:root{
+  --bg:#F4F5F2; --surface:#FFFFFF; --ink:#16232A; --muted:#58656C; --line:#D9DED9; --soft:#E9EDEA;
+  --accent:#1D5868; --accent-soft:#DDEAEC;
+  --f-perf:#8A5526; --f-redes:#2C6B55; --f-ps:#1D5868; --f-series:#963A47; --f-reg:#4A5A8A;
+  --f-display:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-body:"Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
+    --accent:#7FC0CF; --accent-soft:#1C3A42;
+    --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
+  --accent:#7FC0CF; --accent-soft:#1C3A42;
+  --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.55; padding-inline:clamp(16px,4vw,48px); padding-block:0 64px}
+.wrap{max-width:1180px; margin-inline:auto}
+a{color:var(--accent)}
+a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display); text-wrap:balance; margin:0}
+
+/* Encabezado */
+header.top{padding-block:56px 36px; border-bottom:1px solid var(--line); display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:40px; align-items:end}
+.eyebrow{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 14px}
+h1{font-size:clamp(36px,5.4vw,60px); font-weight:600; line-height:1.04; letter-spacing:-.01em}
+.role{font-family:var(--f-display); font-size:clamp(18px,2vw,22px); color:var(--muted); margin:14px 0 0; font-weight:400}
+.bio{max-width:62ch; margin:20px 0 0; font-size:16px}
+.facts{display:grid; gap:0; border-top:2px solid var(--ink)}
+.facts div{display:flex; justify-content:space-between; gap:16px; padding-block:10px; border-bottom:1px solid var(--line); font-size:14.5px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0; font-family:var(--f-mono); font-variant-numeric:tabular-nums; text-align:right}
+
+/* Secciones */
+section{padding-block:44px 0}
+.sec-head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px 24px; margin-bottom:18px}
+h2{font-size:clamp(24px,3vw,30px); font-weight:600}
+.sec-note{color:var(--muted); font-size:14.5px; margin:0; max-width:60ch}
+
+/* Matriz */
+.matrix-box{overflow-x:auto; border:1px solid var(--line); background:var(--surface); border-radius:6px}
+table.matrix{border-collapse:collapse; width:100%; min-width:680px; font-size:14px}
+.matrix th,.matrix td{padding:9px 12px; border-bottom:1px solid var(--line); text-align:center}
+.matrix thead th{font-family:var(--f-mono); font-weight:500; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
+.matrix tbody th{text-align:left; font-weight:500; white-space:nowrap}
+.matrix tbody th small{display:block; font-weight:400; color:var(--muted); font-size:12.5px}
+.matrix tr:last-child th,.matrix tr:last-child td{border-bottom:0}
+.cellbtn{font:inherit; font-family:var(--f-mono); font-variant-numeric:tabular-nums; min-width:34px; height:30px; border-radius:15px; border:1px solid transparent; cursor:pointer; color:#fff; font-size:13px; font-weight:500; padding:0 10px}
+.cellbtn.on{outline:2px solid var(--ink); outline-offset:2px}
+.empty{color:var(--line)}
+
+/* Filtros */
+.filters{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:22px}
+.filters .lbl{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-right:4px}
+.chip{font:inherit; font-size:14px; padding:6px 13px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:8px}
+.chip .dot{width:9px; height:9px; border-radius:50%}
+.chip[aria-pressed="true"]{border-color:var(--ink); background:var(--ink); color:var(--bg)}
+.count{font-family:var(--f-mono); font-size:13px; color:var(--muted); margin-left:auto}
+
+/* Fichas */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr)); gap:18px}
+article.card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:22px 22px 18px; display:flex; flex-direction:column; gap:14px; min-width:0}
+.card-top{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+.idx{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+.fams{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+.fam{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; padding:3px 8px; border-radius:3px; border:1px solid currentColor; white-space:nowrap}
+h3{font-size:21px; font-weight:600; line-height:1.22}
+dl.meta{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 14px; margin:0; font-size:14px}
+dl.meta dt{color:var(--muted); font-family:var(--f-mono); font-size:12px; letter-spacing:.04em; text-transform:uppercase; padding-top:2px}
+dl.meta dd{margin:0; min-width:0}
+.card p{margin:0; font-size:15px}
+.methods{display:flex; flex-wrap:wrap; gap:6px; list-style:none; margin:0; padding:0}
+.methods li{font-size:12.5px; background:var(--soft); color:var(--ink); padding:3px 8px; border-radius:3px}
+.result{border-left:3px solid var(--accent); background:var(--accent-soft); padding:10px 12px; font-size:14px; font-variant-numeric:tabular-nums}
+.result b{font-family:var(--f-mono); font-weight:500; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; display:block; color:var(--muted); margin-bottom:2px}
+.foot{margin-top:auto; padding-top:12px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; font-size:13px; color:var(--muted)}
+.foot .status{color:var(--ink)}
+.foot .status.live::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--f-series); margin-right:6px; vertical-align:1px}
+.foot .status.sent::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--f-redes); margin-right:6px; vertical-align:1px}
+
+/* Herramientas y contacto */
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:28px}
+.tool h3{font-size:19px; margin-bottom:8px}
+.tool p{margin:0; color:var(--muted); font-size:15px}
+.contact{display:grid; gap:0; border-top:2px solid var(--ink)}
+.contact div{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:12px; border-bottom:1px solid var(--line); align-items:center}
+.contact span:first-child{color:var(--muted); font-size:14px}
+.contact .val{font-family:var(--f-mono); font-size:14px; user-select:all; overflow-wrap:anywhere}
+.copy{font:inherit; font-size:13px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:4px; padding:3px 10px; cursor:pointer; margin-left:10px}
+.disclaimer{margin-top:40px; color:var(--muted); font-size:13.5px; max-width:80ch}
+
+@media (max-width:820px){
+  header.top{grid-template-columns:1fr; padding-block:36px 28px; gap:28px}
+}
+@media (prefers-reduced-motion:no-preference){
+  article.card{transition:border-color .15s ease}
+  article.card:hover{border-color:var(--muted)}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Portafolio de análisis · Epidemiología y bioestadística</p>
+      <h1>Carlos González-Torres</h1>
+      <p class="role">Doctorando en Ciencias e Ingeniería para la Salud, Universidad de Valparaíso</p>
+      <p class="bio">Licenciado en Biología (PUCV), con especialización doctoral en Epidemiología y Diplomado en Bioestadística y Métodos de Investigación (UNAB). Trabajo con encuestas poblacionales, registros de cáncer y bases administrativas de salud de Chile, con foco en calidad de vida, métodos multivariados y medicina basada en evidencia.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Análisis en este portafolio</dt><dd>18</dd></div>
+      <div><dt>Fuentes de datos</dt><dd>9</dd></div>
+      <div><dt>Familias de métodos</dt><dd>5</dd></div>
+      <div><dt>Software</dt><dd>Python · R · Stata</dd></div>
+      <div><dt>ORCID</dt><dd><a href="https://orcid.org/0000-0002-7765-6388" target="_blank" rel="noopener">0000-0002-7765-6388</a></dd></div>
+    </dl>
+  </header>
+
+  <section id="indice" aria-labelledby="h-indice">
+    <div class="sec-head">
+      <h2 id="h-indice">Fuentes de datos y métodos</h2>
+      <p class="sec-note">Cada celda indica cuántos análisis combinan esa fuente con esa familia de métodos. Seleccione una celda para filtrar el catálogo.</p>
+    </div>
+    <div class="matrix-box"><table class="matrix" id="matrix"></table></div>
+  </section>
+
+  <section id="analisis" aria-labelledby="h-analisis">
+    <div class="sec-head">
+      <h2 id="h-analisis">Catálogo de análisis</h2>
+    </div>
+    <div class="filters" id="filters" role="toolbar" aria-label="Filtrar por familia de métodos"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="herramientas" aria-labelledby="h-herr">
+    <div class="sec-head"><h2 id="h-herr">Herramientas</h2></div>
+    <div class="cols">
+      <div class="tool">
+        <h3>Python</h3>
+        <p>pandas, statsmodels, scikit-learn, prince, umap-learn, networkx, pyreadstat. Implementaciones propias de MGM con regularización L1, regresión Joinpoint y FAMD validado contra prince.</p>
+      </div>
+      <div class="tool">
+        <h3>R</h3>
+        <p>survey (svydesign, svyglm) para encuestas con muestreo complejo: estratos, conglomerados y factores de expansión.</p>
+      </div>
+      <div class="tool">
+        <h3>Stata 18</h3>
+        <p>Regresión lineal y logística, margins, dtable, medidas de asociación para estudios transversales, de cohorte y de casos y controles.</p>
+      </div>
+      <div class="tool">
+        <h3>Reporte</h3>
+        <p>Manuscritos alineados con STROBE y RECORD, referencias Vancouver verificadas en PubMed, figuras a 300 dpi o más y scripts reproducibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" aria-labelledby="h-contacto">
+    <div class="sec-head"><h2 id="h-contacto">Contacto</h2></div>
+    <div class="contact">
+      <div><span>Correo institucional</span><span><span class="val" id="mail">carlos.gonzalezt@postgrado.uv.cl</span><button class="copy" id="copyMail" type="button">Copiar</button></span></div>
+      <div><span>ORCID</span><a class="val" href="https://orcid.org/0000-0002-7765-6388" target="_blank" rel="noopener">orcid.org/0000-0002-7765-6388</a></div>
+      <div><span>Google Académico</span><a class="val" href="https://scholar.google.com/citations?user=5PYFVe4AAAAJ" target="_blank" rel="noopener">scholar.google.com/citations?user=5PYFVe4AAAAJ</a></div>
+      <div><span>ResearchGate</span><a class="val" href="https://www.researchgate.net/profile/Carlos-Gonzalez-Torres-3" target="_blank" rel="noopener">researchgate.net/profile/Carlos-Gonzalez-Torres-3</a></div>
+      <div><span>Afiliación</span><span>Programa de Doctorado en Ciencias e Ingeniería para la Salud, Universidad de Valparaíso, Valparaíso, Chile</span></div>
+    </div>
+    <p class="disclaimer">Varios análisis corresponden a manuscritos en preparación o en evaluación; sus cifras son preliminares y pueden cambiar tras la revisión por pares. Todos los análisis son secundarios y observacionales, en su mayoría transversales, sobre bases públicas o institucionales: describen asociaciones y no permiten establecer causalidad. El ajuste por puntaje de propensión reduce la confusión medida, pero no la no medida.</p>
+  </section>
+</div>
+
+<script>
+const FAM = {
+  perf:{label:"Perfilamiento no supervisado", short:"Perfiles", color:"var(--f-perf)"},
+  redes:{label:"Modelos de red", short:"Redes", color:"var(--f-redes)"},
+  ps:{label:"Ajuste por puntaje de propensión", short:"Propensión", color:"var(--f-ps)"},
+  series:{label:"Series temporales y tendencias", short:"Series", color:"var(--f-series)"},
+  reg:{label:"Regresión con encuestas", short:"Regresión", color:"var(--f-reg)"}
+};
+const SRC = [
+  {id:"rpc", name:"Registro Poblacional de Cáncer", note:"MINSAL, 1998-2019"},
+  {id:"renci", name:"Registro de Cáncer Infantil", note:"RENCI, 2007-2019"},
+  {id:"msk", name:"MSK-IMPACT 50K", note:"cBioPortal"},
+  {id:"urg", name:"Atenciones de urgencia", note:"DEIS, 2025"},
+  {id:"egr", name:"Egresos hospitalarios", note:"DEIS, 2005-2025"},
+  {id:"encavi", name:"ENCAVI", note:"MINSAL, 2023-2024"},
+  {id:"ebs", name:"Encuesta de Bienestar Social", note:"2025"},
+  {id:"casen", name:"Casen", note:"2024"},
+  {id:"enssex", name:"ENSSEX", note:"2022-2023"}
+];
+const A = [
+ {src:"rpc", fam:["perf"], t:"Perfiles de casos incidentes en el Registro Poblacional de Cáncer",
+  base:"Registro Poblacional de Cáncer (MINSAL), seis registros regionales, 1998-2019", n:"80.890 casos incidentes",
+  d:"Reducción de dimensionalidad de datos mixtos y agrupamiento para describir perfiles de casos. Se evaluó k = 2 a 8 con índices de validación interna y se caracterizaron los conglomerados con tamaños de efecto.",
+  m:["FAMD","K-medias","Silueta","Calinski-Harabasz","Davies-Bouldin","Kruskal-Wallis (ε²)","χ² (V de Cramér)"],
+  r:"Cinco dimensiones factoriales retenidas por criterio del codo y solución de cinco conglomerados.",
+  sw:"Python (prince, scikit-learn)", st:"Enviado a la III Jornada de Registros de Cáncer", stc:"sent", g:"STROBE + RECORD"},
+ {src:"rpc", fam:["redes"], t:"Comparación de redes entre hombres y mujeres en el Registro Poblacional de Cáncer",
+  base:"Registro Poblacional de Cáncer (MINSAL), 1998-2019", n:"Submuestras de 5.000 casos por grupo",
+  d:"Modelo gráfico mixto con edad, año de diagnóstico, registro, sitio tumoral (sin categorías exclusivas de un sexo), base del diagnóstico y estado vital, comparado entre hombres y mujeres.",
+  m:["MGM","Regresiones nodales L1","EBIC","Network Comparison Test","Centralidad","Comunidades"],
+  r:"Redes global y por sexo estimadas; prueba de comparación por permutaciones (400) en ejecución.",
+  sw:"Python (implementación propia)", st:"En curso", stc:"live", g:"STROBE + RECORD"},
+ {src:"renci", fam:["perf"], t:"Perfiles de cáncer infantil en Chile",
+  base:"Registro Nacional de Cáncer Infantil (RENCI), 2007-2019", n:"6.538 casos",
+  d:"Ocho variables mixtas, con conciliación del libro de códigos y recuperación del estado vital desde la fecha de defunción. Caracterización de conglomerados con intervalos de confianza bootstrap (2.000 réplicas) para ε² y V de Cramér.",
+  m:["FAMD","K-means","Método kneedle","Bootstrap","t-SNE","UMAP"],
+  r:"Seis dimensiones retenidas y seis conglomerados. Figura de tres paneles (FAMD, t-SNE y UMAP) calculados sobre las mismas dimensiones.",
+  sw:"Python (prince, scikit-learn, umap-learn)", st:"Manuscrito con lista STROBE", g:"STROBE"},
+ {src:"msk", fam:["perf"], t:"Perfiles clínico-genómicos del cáncer de pulmón de células no pequeñas",
+  base:"MSK-IMPACT 50K (Bandlamudi et al., Cancer Cell 2026)", n:"5.585 pacientes",
+  d:"Cinco variables cuantitativas (edad, log-TMB, pureza, ploidía, aneuploidía) y trece cualitativas, incluidas mutaciones y fusiones. Dimensiones retenidas por gráfico de sedimentación y análisis paralelo por permutación.",
+  m:["FAMD (implementación propia)","Análisis paralelo","K-means","Estabilidad bootstrap (ARI, Jaccard)","t-SNE","UMAP"],
+  r:"Cuatro dimensiones (38,8 % de la inercia) y k = 6 (silueta 0,280; ARI mediano 0,93). Perfiles con fusiones ALK/ROS1/RET, co-mutación KRAS/STK11/KEAP1, histología escamosa y duplicación genómica completa.",
+  sw:"Python", st:"Métodos y resultados redactados", g:"STROBE + RECORD"},
+ {src:"urg", fam:["series"], t:"Demanda diaria de urgencias en Chile",
+  base:"DEIS, Atenciones de Urgencia 2025", n:"9.142.479 registros · 653 establecimientos",
+  d:"Exploración de la estructura de la base (16 regiones, 41 categorías de causa) y descomposición de la serie nacional diaria.",
+  m:["STL","Análisis exploratorio","Agregación de datos masivos"],
+  r:"Componente estacional semanal marcado (Fs = 0,753), mayor demanda los lunes y residuos atípicos en feriados.",
+  sw:"Python (statsmodels)", st:"Análisis exploratorio"},
+ {src:"urg", fam:["series"], t:"Modelado y pronóstico de atenciones de urgencia",
+  base:"DEIS, Atenciones de Urgencia 2025", n:"365 días consecutivos",
+  d:"Seis modelos candidatos con feriados legales, Navidad y Año Nuevo, y el apagón nacional del 25 de febrero como regresores. Selección por MASE con validación de origen móvil (12 orígenes semanales, horizonte de 1 a 7 días).",
+  m:["ADF","Phillips-Perron","KPSS","SARIMA","ETS","Regresión armónica","SARIMAX"],
+  r:"Modelo seleccionado: SARIMAX(2,1,2)(0,1,1)₇ con variables de calendario en escala logarítmica, con pronóstico para enero de 2026.",
+  sw:"Python (statsmodels)", st:"Métodos, tablas y figuras"},
+ {src:"urg", fam:["series"], t:"Urgencias por expresiones de malestar y lesiones autoinfligidas",
+  base:"DEIS, Atenciones de Urgencia 2025, con denominadores del Censo 2024", n:"Series semanales nacionales y conteos regionales",
+  d:"Tasas específicas por edad para los códigos R45.8 y X60-X84 y pruebas de tendencia sobre las series semanales.",
+  m:["Tasas por edad","Tau de Kendall","Regresión lineal de tendencia"],
+  r:"Las urgencias por trastornos mentales en conjunto fueron estables (τ = 0,002; p = 0,98), mientras las dos categorías agudas aumentaron (τ = 0,371; p < 0,001 y τ = 0,235; p = 0,017). Carga proporcionalmente mayor en menores de 15 años.",
+  sw:"Python", st:"Carta al editor adaptada a ARS Medica"},
+ {src:"egr", fam:["series"], t:"Egresos hospitalarios por cáncer de pulmón, 2005-2025",
+  base:"DEIS, bases de egresos hospitalarios", n:"70.640 egresos (CIE-10 C33-C34)",
+  d:"Serie anual con series complementarias por sexo, edad, letalidad, estancia y previsión. Nueve modelos comparados con validación de origen móvil, con 2020 y 2021 tratados como observaciones faltantes.",
+  m:["LOESS","ADF","Phillips-Perron","KPSS","ARIMA","Componentes no observados","Binomial negativa"],
+  r:"Modelo seleccionado: paseo aleatorio, ARIMA(0,1,0), con un pronóstico cercano a 4.056 egresos anuales para 2026-2030.",
+  sw:"Python (statsmodels)", st:"Manuscrito para Salud & Ciencia UV", g:"STROBE + RECORD"},
+ {src:"egr", fam:["series"], t:"Tendencias de las tasas de egreso por cáncer de pulmón",
+  base:"DEIS 2005-2025, con población de World Population Prospects 2024", n:"21 años · por sexo y cinco grupos de edad",
+  d:"Regresión Joinpoint log-lineal programada desde cero: búsqueda exhaustiva de puntos de cambio, pruebas de permutación con corrección de Bonferroni y comparación por BIC.",
+  m:["Joinpoint","APC","AAPC","Permutaciones","BIC","Análisis de sensibilidad"],
+  r:"Puntos de cambio en 2008, 2018 y 2021. Al excluir 2020-2021 solo persiste 2008, lo que es compatible con que el alza posterior a 2021 refleje la recuperación de la actividad hospitalaria tras la pandemia.",
+  sw:"Python (implementación propia)", st:"Informe de métodos y resultados"},
+ {src:"encavi", fam:["reg"], t:"Correlatos de obesidad en adultos chilenos",
+  base:"ENCAVI 2023-2024", n:"8.885 casos completos (14.666 elegibles)",
+  d:"Bloques sociodemográfico, conductual y psicosocial, con el diseño muestral complejo de la encuesta (estratos, conglomerados y factor de expansión) y tres modelos secuenciales.",
+  m:["svyglm cuasi-binomial","Modelos secuenciales","d de Cohen","Forest plot"],
+  r:"Pseudo-R² de McFadden de 0,022, 0,029 y 0,043 en los tres modelos.",
+  sw:"R (survey) y Python", st:"Manuscrito adaptado a JMH", g:"STROBE"},
+ {src:"encavi", fam:["reg"], t:"Actividad física y dominios de calidad de vida",
+  base:"ENCAVI 2023-2024", n:"16.590 personas",
+  d:"Exposición IPAQ en tres niveles y cuatro modelos, uno por dominio del WHOQOL-BREF, ajustados por variables sociodemográficas y de salud, con análisis estratificados por sexo, edad e ingreso. Las covariables de ajuste se organizaron en un diagrama (DAGitty).",
+  m:["Regresión lineal multivariada","Errores estándar robustos","Medias ajustadas (margins)"],
+  r:"Distribución de la exposición: 57,4 % inactivo, 28,9 % mínimamente activo y 13,7 % activo HEPA.",
+  sw:"Stata 18", st:"Manuscrito y póster A0", g:"STROBE"},
+ {src:"encavi", fam:["ps"], t:"Actividad física HEPA y calidad de vida: asociación ajustada por puntaje de propensión",
+  base:"ENCAVI", n:"6.755 casos completos · 2.110 pares emparejados",
+  d:"Contraste entre activos HEPA y mínimamente activos, excluyendo a los inactivos, sobre los cuatro dominios del WHOQOL-BREF.",
+  m:["PSM 1:1 con caliper 0,2 DE","IPTW estabilizado (p1-p99)","WLS doblemente robusto","HC3","Love plots","McNemar"],
+  r:"Diferencias ajustadas con IPTW y covariables: dominio físico +1,97 (IC 95 %: 1,22 a 2,72) y psicológico +1,69 (0,93 a 2,45) puntos, bajo el umbral de relevancia clínica. |DME| máxima de 0,436 a 0,020.",
+  sw:"Python", st:"Análisis completado"},
+ {src:"encavi", fam:["perf","redes"], t:"Enfermedades crónicas, hábitos, vivienda y entorno",
+  base:"ENCAVI 2023-2024",
+  d:"Primera versión con red bayesiana discreta (un nodo por enfermedad, aprendizaje estructural con Hill-Climbing, BIC y bootstrap), reemplazada por perfilamiento de datos mixtos con contrastes según multimorbilidad (cero, una, dos o más).",
+  m:["Red bayesiana","Hill-Climbing + BIC","FAMD","K-Prototypes"],
+  sw:"Python", st:"Manuscrito para Salud & Ciencia UV", g:"STROBE"},
+ {src:"ebs", fam:["redes"], t:"Vivienda, medio ambiente y salud",
+  base:"Encuesta de Bienestar Social 2025",
+  d:"Red amplia con todos los ítems de vivienda, medio ambiente y salud más nodos sociodemográficos. Descriptivos con diseño muestral complejo, red principal sin ponderar y análisis de sensibilidad ponderado.",
+  m:["MGM","Regresiones nodales L1","EBIC","Regla AND","Predictibilidad nodal","Bootstrap","Comunidades"],
+  sw:"Python", st:"Manuscrito para Salud & Ciencia UV", g:"STROBE"},
+ {src:"ebs", fam:["redes"], t:"Actividad física, hábitos y distrés psicológico",
+  base:"Encuesta de Bienestar Social 2025",
+  d:"Red mixta con los cuatro ítems del PHQ-4, nodos de actividad física y hábitos y variables sociodemográficas, con figuras combinadas en paneles.",
+  m:["MGM","Centralidad","Bootstrap","Comunidades","PHQ-4"],
+  sw:"Python", st:"Manuscrito para JMH", g:"STROBE"},
+ {src:"ebs", fam:["ps"], t:"Frecuencia de deporte y distrés psicológico: asociación ajustada por puntaje de propensión",
+  base:"Encuesta de Bienestar Social 2025",
+  d:"Exposición en tres niveles (no practica, 1 a 2 y 3 o más veces por semana) y PHQ-4 en cuatro categorías. Covariables del puntaje elegidas por su relación con la exposición, el desenlace o ambos. Asociación ajustada con cinco análisis de sensibilidad.",
+  m:["Puntaje de propensión generalizado","IPTW × factor de expansión","Logística ordinal","Bootstrap por conglomerados (300)","E-value"],
+  sw:"Python (statsmodels, networkx)", st:"Manuscrito, suplemento y STROBE para JMH", g:"STROBE"},
+ {src:"casen", fam:["ps"], t:"Inseguridad alimentaria del hogar y exceso de peso infantil: estudio transversal",
+  base:"Casen 2024", n:"21.523 niños y niñas de 0 a 9 años",
+  d:"Puntaje de propensión ponderado por el diseño muestral, con especificación revisada hasta lograr balance (educación del jefe de hogar e interacciones con quintil de ingreso).",
+  m:["PSM 1:1 con caliper","IPTW estabilizado","DME","Análisis de sensibilidad","E-value"],
+  r:"OR crudo 1,38 (IC 95 %: 1,17 a 1,61); PSM 1,22 (1,01 a 1,47); IPTW 1,19 (0,98 a 1,43). DME máxima de 0,53 a 0,04 con PSM. E-value 1,64.",
+  sw:"Python", st:"Manuscrito para ARS Medica", g:"STROBE"},
+ {src:"enssex", fam:["redes"], t:"Estructura de red de conductas sexuales de riesgo e ITS",
+  base:"ENSSEX 2022-2023", n:"9.026 casos completos (18.919 personas iniciadas sexualmente)",
+  d:"Quince nodos sociodemográficos, conductuales y de salud sexual. Variables continuas con transformación nonparanormal y estabilidad evaluada por bootstrap no paramétrico y de eliminación de casos.",
+  m:["MGM","EBIC (γ = 0,25)","Nonparanormal","Coeficiente CS","Comunidades"],
+  r:"68 de 105 aristas (densidad 0,648), tres comunidades (Q = 0,233) y CS de fuerza 0,80.",
+  sw:"Python (implementación propia)", st:"Enviado a la Revista Chilena de Salud Pública", stc:"sent", g:"STROBE"}
+];
+
+const state = {fam:null, src:null};
+const grid = document.getElementById("grid");
+const filters = document.getElementById("filters");
+const matrix = document.getElementById("matrix");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const srcName = id => SRC.find(s => s.id === id).name;
+
+function renderMatrix(){
+  let h = "<thead><tr><th scope=\"col\" style=\"text-align:left\">Fuente</th>";
+  for (const k in FAM) h += `<th scope="col">${FAM[k].short}</th>`;
+  h += "</tr></thead><tbody>";
+  for (const s of SRC){
+    h += `<tr><th scope="row">${esc(s.name)}<small>${esc(s.note)}</small></th>`;
+    for (const k in FAM){
+      const c = A.filter(a => a.src === s.id && a.fam.includes(k)).length;
+      const on = state.fam === k && state.src === s.id;
+      h += c ? `<td><button class="cellbtn${on?" on":""}" style="background:${FAM[k].color}" data-f="${k}" data-s="${s.id}" aria-label="${c} análisis de ${esc(s.name)} con ${esc(FAM[k].label)}">${c}</button></td>` : `<td class="empty" aria-hidden="true">·</td>`;
+    }
+    h += "</tr>";
+  }
+  matrix.innerHTML = h + "</tbody>";
+}
+
+function renderFilters(){
+  let h = `<span class="lbl">Métodos</span><button class="chip" type="button" data-f="" aria-pressed="${!state.fam && !state.src}">Todos</button>`;
+  for (const k in FAM) h += `<button class="chip" type="button" data-f="${k}" aria-pressed="${state.fam === k}"><span class="dot" style="background:${FAM[k].color}"></span>${FAM[k].label}</button>`;
+  const shown = visible().length;
+  const srcTxt = state.src ? ` · ${esc(srcName(state.src))}` : "";
+  h += `<span class="count" aria-live="polite">${shown} de ${A.length}${srcTxt}</span>`;
+  filters.innerHTML = h;
+}
+
+function visible(){
+  return A.map((a,i) => ({...a, i})).filter(a => (!state.fam || a.fam.includes(state.fam)) && (!state.src || a.src === state.src));
+}
+
+function renderCards(){
+  grid.innerHTML = visible().map(a => `
+    <article class="card">
+      <div class="card-top">
+        <span class="idx">N.º ${String(a.i + 1).padStart(2,"0")}</span>
+        <span class="fams">${a.fam.map(f => `<span class="fam" style="color:${FAM[f].color}">${FAM[f].short}</span>`).join("")}</span>
+      </div>
+      <h3>${esc(a.t)}</h3>
+      <dl class="meta">
+        <dt>Base</dt><dd>${esc(a.base)}</dd>
+        ${a.n ? `<dt>n</dt><dd>${esc(a.n)}</dd>` : ""}
+      </dl>
+      <p>${esc(a.d)}</p>
+      <ul class="methods">${a.m.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      ${a.r ? `<div class="result"><b>Hallazgo principal</b>${esc(a.r)}</div>` : ""}
+      <div class="foot">
+        <span>${esc(a.sw)}${a.g ? " · " + esc(a.g) : ""}</span>
+        <span class="status ${a.stc || ""}">${esc(a.st)}</span>
+      </div>
+    </article>`).join("");
+}
+
+function render(){ renderMatrix(); renderFilters(); renderCards(); }
+
+filters.addEventListener("click", e => {
+  const b = e.target.closest("button[data-f]"); if (!b) return;
+  state.fam = b.dataset.f || null; state.src = null; render();
+});
+matrix.addEventListener("click", e => {
+  const b = e.target.closest("button[data-f]"); if (!b) return;
+  const same = state.fam === b.dataset.f && state.src === b.dataset.s;
+  state.fam = same ? null : b.dataset.f; state.src = same ? null : b.dataset.s;
+  render();
+  document.getElementById("analisis").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+});
+document.getElementById("copyMail").addEventListener("click", e => {
+  const btn = e.currentTarget, txt = document.getElementById("mail").textContent;
+  const done = ok => { btn.textContent = ok ? "Copiado" : "Seleccionado"; setTimeout(() => btn.textContent = "Copiar", 1600); };
+  try {
+    navigator.clipboard.writeText(txt).then(() => done(true), () => { selectMail(); done(false); });
+  } catch(_) { selectMail(); done(false); }
+});
+function selectMail(){ const r = document.createRange(); r.selectNodeContents(document.getElementById("mail")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+render();
+</script>
+
+</body>
+</html>
