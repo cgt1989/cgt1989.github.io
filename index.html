@@ -131,7 +131,8 @@ dl.meta dd{margin:0; min-width:0}
     </div>
     <dl class="facts">
       <div><dt>Análisis en este portafolio</dt><dd>23</dd></div>
-      <div><dt>Artículos publicados</dt><dd>6</dd></div>
+      <div><dt>Artículos publicados</dt><dd>7</dd></div>
+      <div><dt>Síntesis de evidencia</dt><dd>7</dd></div>
       <div><dt>Fuentes de datos</dt><dd>10</dd></div>
       <div><dt>Familias de métodos</dt><dd>5</dd></div>
       <div><dt>Software</dt><dd>Python · R · Stata</dd></div>
@@ -153,6 +154,14 @@ dl.meta dd{margin:0; min-width:0}
     </div>
     <div class="filters" id="filters" role="toolbar" aria-label="Filtrar por familia de métodos"></div>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="sintesis" aria-labelledby="h-sint">
+    <div class="sec-head">
+      <h2 id="h-sint">Síntesis de evidencia</h2>
+      <p class="sec-note">Revisiones sistemáticas, protocolos registrados e informes de evaluación de tecnologías sanitarias.</p>
+    </div>
+    <div class="grid" id="syn"></div>
   </section>
 
   <section id="herramientas" aria-labelledby="h-herr">
@@ -212,10 +221,11 @@ const SRC = [
 ];
 const A = [
  {src:"ebs", fam:["reg"], t:"Actividad física, visitas a áreas verdes y distrés psicológico",
-  base:"Encuesta de Bienestar Social 2023",
-  d:"Análisis secundario de la encuesta nacional sobre la relación del cumplimiento de la recomendación de actividad física y la visita a áreas verdes con el distrés psicológico en adultos chilenos.",
-  m:["Análisis secundario de encuesta nacional"],
-  au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", st:"Publicado en Journal of Movement & Health (2026)", stc:"pub", y:2026.06},
+  base:"Encuesta de Bienestar Social 2023", n:"10.848 adultos",
+  d:"Estudio transversal con distrés psicológico definido como PHQ-4 ≥ 6 y modelos de regresión logística binaria ajustados por variables conductuales, de salud y sociodemográficas.",
+  m:["Regresión logística binaria","PHQ-4","Modelos ajustados"],
+  r:"El 53,1 % presentó distrés. La actividad física suficiente (OR 0,680) y la visita frecuente a áreas verdes (OR 0,616) se asociaron con menor probabilidad de distrés; la percepción positiva de salud mostró la asociación más fuerte (OR 0,171).",
+  sw:"Stata 18", au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", doi:"10.5027/jmh-Vol23-Issue2(2026)art290", st:"Publicado en Journal of Movement & Health (2026)", stc:"pub", y:2026.07},
  {src:"ebs", fam:["reg"], t:"Obesidad y distrés psicológico durante la pandemia de COVID-19",
   base:"Encuesta de Bienestar Social 2021", n:"10.395 personas",
   d:"Modelos de regresión logística en ambas direcciones para explorar una posible relación bidireccional entre obesidad y distrés psicológico grave.",
@@ -303,8 +313,8 @@ const A = [
   base:"ENCAVI 2023-2024", n:"16.590 personas",
   d:"Exposición IPAQ en tres niveles y cuatro modelos, uno por dominio del WHOQOL-BREF, ajustados por variables sociodemográficas y de salud, con análisis estratificados por sexo, edad e ingreso. Las covariables de ajuste se organizaron en un diagrama (DAGitty).",
   m:["Regresión lineal multivariada","Errores estándar robustos","Medias ajustadas (margins)"],
-  r:"Distribución de la exposición: 57,4 % inactivo, 28,9 % mínimamente activo y 13,7 % activo HEPA.",
-  sw:"Stata 18", g:"STROBE", au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", st:"Publicado en Journal of Movement & Health (2026)", stc:"pub", y:2026.09},
+  r:"57,4 % inactivo, 28,9 % activo y 13,7 % activo HEPA. Tras el ajuste, los puntajes aumentaron con el nivel de actividad física en los cuatro dominios (gradiente con p < 0,05), sobre todo en los dominios físico y psicológico.",
+  sw:"Stata 18", g:"STROBE", au:"Primer autor (con E. Castañeda, M. Veas R. e I. Vergara)", doi:"10.5027/jmh-Vol24-Issue1(2027)art298", st:"Publicado en Journal of Movement & Health (en línea 2026, vol. 24, 2027)", stc:"pub", y:2026.09},
  {src:"encavi", fam:["ps"], t:"Actividad física HEPA y calidad de vida: asociación ajustada por puntaje de propensión",
   base:"ENCAVI", n:"6.755 casos completos · 2.110 pares emparejados",
   d:"Contraste entre activos HEPA y mínimamente activos, excluyendo a los inactivos, sobre los cuatro dominios del WHOQOL-BREF.",
@@ -345,6 +355,44 @@ const A = [
   sw:"Python (implementación propia)", st:"Enviado a la Revista Chilena de Salud Pública", stc:"sent", g:"STROBE"}
 ];
 
+const SYN = [
+ {k:"Revisión sistemática metodológica", t:"Uso y reporte de IPTW en emulaciones de ensayos con datos del mundo real en CPCNP tratado con EGFR-TKI",
+  base:"MEDLINE, Scopus y Web of Science, sin restricción de fecha", n:"497 registros · 28 estudios incluidos",
+  d:"Cribado independiente por dos revisores en dos etapas y extracción con una ficha de 47 elementos en nueve dominios, clasificando cada elemento crítico para la inferencia causal como reportado, indeterminable o no reportado.",
+  m:["Elementos de PRISMA 2020","Rayyan","Ficha de 47 elementos","Hoja de ruta de reporte"],
+  r:"82 % especificó el software y reportó análisis de sensibilidad, y 79 % comparó el balance antes y después de ponderar. Solo 32 % declaró el estimando, 29 % estabilizó los pesos, 7 % mencionó supuestos causales y ninguno usó DAG ni compartió su código.",
+  au:"Primer autor (con E. Castañeda y E. Aliaga)", st:"En revisión por pares", stc:"sent"},
+ {k:"Protocolo de revisión sistemática", t:"Intervenciones de actividad física y calidad de vida en cáncer de pulmón de células no pequeñas",
+  base:"CENTRAL, MEDLINE, Embase, PsycINFO, Scopus, Google Scholar y ClinicalTrials.gov",
+  d:"Ensayos aleatorizados, estudios cuasi- y no aleatorizados y diseños observacionales controlados en adultos con CPCNP de cualquier estadio. Desenlace primario: calidad de vida relacionada con la salud con instrumentos validados (EORTC QLQ-C30, QLQ-LC13, FACT-L, SF-36 o EQ-5D).",
+  m:["PRISMA-P","RoB de Cochrane","ROBINS-I","SWiM","Metanálisis de efectos aleatorios"],
+  au:"Primer autor (con E. Castañeda, E. Aliaga, M. Veas R. e I. Vergara)", st:"Registrado en PROSPERO (CRD420261443769)", stc:"pub"},
+ {k:"Protocolo de revisión Cochrane", t:"Intervenciones para mejorar la adherencia a tratamientos basados en ejercicio en personas con artrosis de rodilla",
+  base:"Cochrane Database of Systematic Reviews",
+  d:"Protocolo de revisión sistemática de intervenciones elaborado con la metodología Cochrane.",
+  m:["Metodología Cochrane"],
+  au:"Cuarto autor", doi:"10.1002/14651858.CD016088", st:"Publicado (2025)", stc:"pub"},
+ {k:"Revisión con búsqueda sistemática", t:"Academic Entitlement en estudiantes de educación superior del área de la salud",
+  base:"Cinco bases de datos", n:"16 estudios de 15 países",
+  d:"Búsqueda exhaustiva con criterios de elegibilidad explícitos, cribado triple y síntesis narrativa y tabular, encuadrada como systematic search and review según la tipología de Grant y Booth.",
+  m:["Systematic search and review","Marco SALSA","SANRA"],
+  au:"Coautor", st:"Aceptado en Revista Hospital Clínico Universidad de Chile (2026)", stc:"pub"},
+ {k:"Informe de síntesis de evidencia", t:"Deprescripción de antidepresivos",
+  base:"Cochrane Iberoamérica para Avalia-t (ACIS, Galicia)",
+  d:"Informe para la evaluación de tecnologías sanitarias impulsado por el Ministerio de Sanidad de España.",
+  m:["Metodología Cochrane","Evaluación de tecnologías sanitarias"],
+  au:"Asistencia técnica", st:"Versión 1.0 (febrero de 2026)", stc:"pub"},
+ {k:"Informe de síntesis de evidencia", t:"Colonoscopia en el tamizaje de cáncer colorrectal",
+  base:"Informe impulsado por el Ministerio de Sanidad de España",
+  d:"Participación en la extracción estructurada de datos de desenlaces de los estudios incluidos.",
+  m:["Extracción de datos","Evaluación de tecnologías sanitarias"],
+  au:"Colaborador", st:"Participación en el informe"},
+ {k:"Protocolo de revisión sistemática", t:"Actividad física por dominio y estrés en docentes escolares",
+  base:"Búsqueda de factibilidad en PubMed",
+  d:"Actividad física laboral, de transporte y de ocio frente a estrés percibido, estrés docente, burnout y biomarcadores (cortisol y variabilidad de la frecuencia cardíaca), en estudios observacionales y experimentales.",
+  m:["PRISMA-P","SWiM"],
+  au:"Primer autor", st:"Protocolo redactado para JMH"}
+];
 A.sort((a,b) => (b.stc === "pub" ? b.y : 0) - (a.stc === "pub" ? a.y : 0));
 const state = {fam:null, src:null, pub:false};
 const grid = document.getElementById("grid");
@@ -406,7 +454,29 @@ function renderCards(){
     </article>`).join("");
 }
 
+function renderSyn(){
+  document.getElementById("syn").innerHTML = SYN.map(a => `
+    <article class="card">
+      <div class="card-top">
+        <span class="fam" style="color:var(--accent)">${esc(a.k)}</span>
+      </div>
+      <h3>${esc(a.t)}</h3>
+      <dl class="meta">
+        <dt>Fuente</dt><dd>${esc(a.base)}</dd>
+        ${a.n ? `<dt>n</dt><dd>${esc(a.n)}</dd>` : ""}
+        ${a.au ? `<dt>Autoría</dt><dd>${esc(a.au)}</dd>` : ""}
+      </dl>
+      <p>${esc(a.d)}</p>
+      <ul class="methods">${a.m.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      ${a.r ? `<div class="result"><b>Hallazgo principal</b>${esc(a.r)}</div>` : ""}
+      <div class="foot">
+        <span>${a.doi ? `<a class="doi" href="https://doi.org/${esc(a.doi)}" target="_blank" rel="noopener">doi.org/${esc(a.doi)}</a>` : ""}</span>
+        <span class="status ${a.stc || ""}">${esc(a.st)}</span>
+      </div>
+    </article>`).join("");
+}
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
+renderSyn();
 
 filters.addEventListener("click", e => {
   const pb = e.target.closest("button[data-pub]");
