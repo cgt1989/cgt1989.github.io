@@ -12,7 +12,7 @@
 /* Layout: ficha de investigador; encabezado sobrio, matriz fuente × método como índice, catálogo de fichas filtrable */
 :root{
   --bg:#F4F5F2; --surface:#FFFFFF; --ink:#16232A; --muted:#58656C; --line:#D9DED9; --soft:#E9EDEA;
-  --accent:#1D5868; --accent-soft:#DDEAEC;
+  --accent:#1D5868; --accent-soft:#DDEAEC; --on-accent:#FFFFFF; --shadow:0 1px 0 rgba(22,35,42,.06), 0 2px 6px rgba(22,35,42,.10); --shadow-hi:0 2px 0 rgba(22,35,42,.08), 0 8px 18px rgba(22,35,42,.16);
   --f-perf:#8A5526; --f-redes:#2C6B55; --f-ps:#1D5868; --f-series:#963A47; --f-reg:#4A5A8A;
   --f-display:"Source Serif 4", Georgia, "Times New Roman", serif;
   --f-body:"Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -21,14 +21,14 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
-    --accent:#7FC0CF; --accent-soft:#1C3A42;
+    --accent:#7FC0CF; --accent-soft:#1C3A42; --on-accent:#0E1A1E; --shadow:0 1px 0 rgba(0,0,0,.35), 0 3px 8px rgba(0,0,0,.45); --shadow-hi:0 2px 0 rgba(0,0,0,.4), 0 10px 22px rgba(0,0,0,.55);
     --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#11181B; --surface:#172126; --ink:#E4EAE8; --muted:#9AA8AD; --line:#2A373D; --soft:#1D292E;
-  --accent:#7FC0CF; --accent-soft:#1C3A42;
+  --accent:#7FC0CF; --accent-soft:#1C3A42; --on-accent:#0E1A1E; --shadow:0 1px 0 rgba(0,0,0,.35), 0 3px 8px rgba(0,0,0,.45); --shadow-hi:0 2px 0 rgba(0,0,0,.4), 0 10px 22px rgba(0,0,0,.55);
   --f-perf:#D9A06A; --f-redes:#7CC3A6; --f-ps:#7FC0CF; --f-series:#E08894; --f-reg:#A3B1E0;
   color-scheme:dark;
 }
@@ -51,10 +51,17 @@ h1{font-size:clamp(36px,5.4vw,60px); font-weight:600; line-height:1.04; letter-s
 .facts dd{margin:0; font-family:var(--f-mono); font-variant-numeric:tabular-nums; text-align:right}
 
 /* Navegación entre secciones */
-nav.sections{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:4px 24px; padding-block:12px}
-nav.sections a{color:var(--muted); text-decoration:none; font-size:14.5px; font-weight:500; padding-block:4px; border-bottom:2px solid transparent}
-nav.sections a:hover{color:var(--ink); border-bottom-color:var(--line)}
-nav.sections a.hl{color:var(--ink); border-bottom-color:var(--accent)}
+nav.sections{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:10px; padding-block:14px}
+nav.sections a{display:inline-flex; align-items:center; gap:8px; color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:600; padding:9px 16px; border-radius:8px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+nav.sections a .n{font-family:var(--f-mono); font-size:11.5px; font-weight:500; color:var(--muted)}
+nav.sections a.on{background:var(--accent); border-color:var(--accent); color:var(--on-accent); box-shadow:var(--shadow-hi)}
+nav.sections a.on .n{color:var(--on-accent); opacity:.8}
+@media (prefers-reduced-motion:no-preference){
+  nav.sections a{transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease}
+  nav.sections a:hover{transform:translateY(-2px); box-shadow:var(--shadow-hi)}
+  nav.sections a:active{transform:translateY(0); box-shadow:var(--shadow)}
+}
+@media (max-width:520px){ nav.sections{gap:8px} nav.sections a{padding:7px 12px; font-size:13.5px} }
 section{scroll-margin-top:64px}
 
 /* Secciones */
@@ -148,11 +155,11 @@ dl.meta dd{margin:0; min-width:0}
   </header>
 
   <nav class="sections" aria-label="Secciones del portafolio">
-    <a href="#analisis">Análisis estadísticos</a>
-    <a href="#sintesis" class="hl">Síntesis de evidencia</a>
-    <a href="#indice">Fuentes y métodos</a>
-    <a href="#herramientas">Herramientas</a>
-    <a href="#contacto">Contacto</a>
+    <a href="#indice"><span class="n">01</span>Fuentes y métodos</a>
+    <a href="#analisis"><span class="n">02</span>Análisis estadísticos</a>
+    <a href="#sintesis"><span class="n">03</span>Síntesis de evidencia</a>
+    <a href="#herramientas"><span class="n">04</span>Herramientas</a>
+    <a href="#contacto"><span class="n">05</span>Contacto</a>
   </nav>
 
   <section id="indice" aria-labelledby="h-indice">
@@ -487,6 +494,17 @@ function renderSyn(){
 }
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
 renderSyn();
+(function(){
+  const links = [...document.querySelectorAll("nav.sections a")];
+  const mark = id => links.forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("on", on); on ? a.setAttribute("aria-current","true") : a.removeAttribute("aria-current"); });
+  mark("indice");
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(es => {
+    const vis = es.filter(e => e.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (vis.length) mark(vis[0].target.id);
+  }, {rootMargin:"-80px 0px -55% 0px"});
+  links.forEach(a => { const el = document.querySelector(a.getAttribute("href")); if (el) io.observe(el); });
+})();
 
 filters.addEventListener("click", e => {
   const pb = e.target.closest("button[data-pub]");
