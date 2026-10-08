@@ -50,6 +50,13 @@ h1{font-size:clamp(36px,5.4vw,60px); font-weight:600; line-height:1.04; letter-s
 .facts dt{color:var(--muted)}
 .facts dd{margin:0; font-family:var(--f-mono); font-variant-numeric:tabular-nums; text-align:right}
 
+/* Navegación entre secciones */
+nav.sections{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:4px 24px; padding-block:12px}
+nav.sections a{color:var(--muted); text-decoration:none; font-size:14.5px; font-weight:500; padding-block:4px; border-bottom:2px solid transparent}
+nav.sections a:hover{color:var(--ink); border-bottom-color:var(--line)}
+nav.sections a.hl{color:var(--ink); border-bottom-color:var(--accent)}
+section{scroll-margin-top:64px}
+
 /* Secciones */
 section{padding-block:44px 0}
 .sec-head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px 24px; margin-bottom:18px}
@@ -140,6 +147,14 @@ dl.meta dd{margin:0; min-width:0}
     </dl>
   </header>
 
+  <nav class="sections" aria-label="Secciones del portafolio">
+    <a href="#analisis">Análisis estadísticos</a>
+    <a href="#sintesis" class="hl">Síntesis de evidencia</a>
+    <a href="#indice">Fuentes y métodos</a>
+    <a href="#herramientas">Herramientas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
   <section id="indice" aria-labelledby="h-indice">
     <div class="sec-head">
       <h2 id="h-indice">Fuentes de datos y métodos</h2>
@@ -150,7 +165,7 @@ dl.meta dd{margin:0; min-width:0}
 
   <section id="analisis" aria-labelledby="h-analisis">
     <div class="sec-head">
-      <h2 id="h-analisis">Catálogo de análisis</h2>
+      <h2 id="h-analisis">Análisis estadísticos</h2>
     </div>
     <div class="filters" id="filters" role="toolbar" aria-label="Filtrar por familia de métodos"></div>
     <div class="grid" id="grid"></div>
