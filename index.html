@@ -548,10 +548,10 @@ function renderPubs(){
 }
 const SW = [
  {t:"Target Trial Facilitator (TTF)", k:"Aplicación de inferencia causal", au:"Carlos González-Torres", y:"2026",
-  d:"Guía paso a paso la emulación de ensayos objetivo con datos observacionales, desde el protocolo hasta el informe final. Hace explícita cada decisión analítica: elegibilidad, tiempo cero, ponderación por puntaje de propensión, supuestos y análisis de sensibilidad.",
+  d:"Desarrollado como parte de mi tesis doctoral. Guía paso a paso la emulación de ensayos objetivo con datos observacionales, desde el protocolo hasta el informe final. Hace explícita cada decisión analítica: elegibilidad, tiempo cero, ponderación por puntaje de propensión, supuestos y análisis de sensibilidad.",
   m:["Target Trial Emulation","Puntaje de propensión","Scripts en Python, R y Stata","Módulo de costo-efectividad"],
   r:"Entrega resultados reproducibles con scripts listos para Python, R y Stata. Presentado en el Seminario internacional de Emprendimiento, innovación y economía circular en salud (Universidad de Valparaíso, octubre de 2026).",
-  st:"En desarrollo", stc:"live"},
+  st:"En desarrollo", stc:"live", note:"Parte de la tesis doctoral · será público al finalizar la tesis"},
  {t:"Spinpy", k:"Modelado de hueso trabecular", au:"Carlos González-Torres y David Ortiz", y:"2026",
   d:"Ajusta microestructuras espinodales y dual-lattice a volúmenes de hueso trabecular obtenidos por microtomografía y genera réplicas sintéticas cuya morfometría y anisotropía se comparan cuantitativamente con las del tejido real.",
   m:["Microtomografía (micro-CT)","Microestructuras espinodales","Dual-lattice","Morfometría y anisotropía"],
@@ -570,7 +570,7 @@ function renderSw(){
       <ul class="methods">${a.m.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
       ${a.r ? `<div class="result"><b>Qué entrega</b>${esc(a.r)}</div>` : ""}
       <div class="foot">
-        <span>${a.url ? `<a class="doi" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.url.replace("https://",""))}</a>` : "Repositorio privado"}</span>
+        <span>${a.url ? `<a class="doi" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.url.replace("https://",""))}</a>` : esc(a.note || "Repositorio privado")}</span>
         <span class="status ${a.stc || ""}">${esc(a.st)}</span>
       </div>
     </article>`).join("");
