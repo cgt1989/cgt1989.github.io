@@ -160,6 +160,7 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
       <div><dt>Síntesis de evidencia</dt><dd>6</dd></div>
       <div><dt>Artículos aceptados</dt><dd>8</dd></div>
       <div><dt>Manuscritos enviados</dt><dd>8</dd></div>
+      <div><dt>Software propio</dt><dd>2</dd></div>
       <div><dt>Fuentes de datos</dt><dd>10</dd></div>
       <div><dt>Familias de métodos</dt><dd>5</dd></div>
       <div><dt>Software</dt><dd>Python · R · Stata</dd></div>
@@ -171,9 +172,10 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
     <a href="#indice"><span class="n">01</span>Fuentes y métodos</a>
     <a href="#analisis"><span class="n">02</span>Análisis estadísticos</a>
     <a href="#sintesis"><span class="n">03</span>Síntesis de evidencia</a>
-    <a href="#publicaciones"><span class="n">04</span>Publicaciones</a>
-    <a href="#herramientas"><span class="n">05</span>Herramientas</a>
-    <a href="#contacto"><span class="n">06</span>Contacto</a>
+    <a href="#software"><span class="n">04</span>Software</a>
+    <a href="#publicaciones"><span class="n">05</span>Publicaciones</a>
+    <a href="#herramientas"><span class="n">06</span>Herramientas</a>
+    <a href="#contacto"><span class="n">07</span>Contacto</a>
   </nav>
 
   <section id="indice" aria-labelledby="h-indice">
@@ -198,6 +200,14 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
       <p class="sec-note">Revisiones sistemáticas, protocolos registrados e informes de evaluación de tecnologías sanitarias.</p>
     </div>
     <div class="grid" id="syn"></div>
+  </section>
+
+  <section id="software" aria-labelledby="h-sw">
+    <div class="sec-head">
+      <h2 id="h-sw">Software creado</h2>
+      <p class="sec-note">Herramientas propias para análisis de datos en salud e investigación biomédica.</p>
+    </div>
+    <div class="grid" id="swgrid"></div>
   </section>
 
   <section id="publicaciones" aria-labelledby="h-pub">
@@ -536,6 +546,35 @@ function renderPubs(){
         </li>`; }).join("")}</ol>
     </div>`).join("");
 }
+const SW = [
+ {t:"Target Trial Facilitator (TTF)", k:"Aplicación de inferencia causal", au:"Carlos González-Torres", y:"2026",
+  d:"Guía paso a paso la emulación de ensayos objetivo con datos observacionales, desde el protocolo hasta el informe final. Hace explícita cada decisión analítica: elegibilidad, tiempo cero, ponderación por puntaje de propensión, supuestos y análisis de sensibilidad.",
+  m:["Target Trial Emulation","Puntaje de propensión","Scripts en Python, R y Stata","Módulo de costo-efectividad"],
+  r:"Entrega resultados reproducibles con scripts listos para Python, R y Stata. Presentado en el Seminario internacional de Emprendimiento, innovación y economía circular en salud (Universidad de Valparaíso, octubre de 2026).",
+  st:"En desarrollo", stc:"live"},
+ {t:"Spinpy", k:"Modelado de hueso trabecular", au:"Carlos González-Torres y David Ortiz", y:"2026",
+  d:"Ajusta microestructuras espinodales y dual-lattice a volúmenes de hueso trabecular obtenidos por microtomografía y genera réplicas sintéticas cuya morfometría y anisotropía se comparan cuantitativamente con las del tejido real.",
+  m:["Microtomografía (micro-CT)","Microestructuras espinodales","Dual-lattice","Morfometría y anisotropía"],
+  url:"https://github.com/cgt1989/spinpy", st:"Disponible en GitHub", stc:"pub"}
+];
+function renderSw(){
+  document.getElementById("swgrid").innerHTML = SW.map(a => `
+    <article class="card">
+      <div class="card-top">
+        <span class="fam" style="color:var(--accent)">${esc(a.k)}</span>
+        <span class="idx">${esc(a.y)}</span>
+      </div>
+      <h3>${esc(a.t)}</h3>
+      <dl class="meta"><dt>Autoría</dt><dd>${esc(a.au)}</dd></dl>
+      <p>${esc(a.d)}</p>
+      <ul class="methods">${a.m.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      ${a.r ? `<div class="result"><b>Qué entrega</b>${esc(a.r)}</div>` : ""}
+      <div class="foot">
+        <span>${a.url ? `<a class="doi" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.url.replace("https://",""))}</a>` : "Repositorio privado"}</span>
+        <span class="status ${a.stc || ""}">${esc(a.st)}</span>
+      </div>
+    </article>`).join("");
+}
 function renderSyn(){
   document.getElementById("syn").innerHTML = SYN.map(a => `
     <article class="card">
@@ -560,6 +599,7 @@ function renderSyn(){
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
 renderSyn();
 renderPubs();
+renderSw();
 (function(){
   const links = [...document.querySelectorAll("nav.sections a")];
   const mark = id => links.forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("on", on); on ? a.setAttribute("aria-current","true") : a.removeAttribute("aria-current"); });
