@@ -113,6 +113,17 @@ dl.meta dd{margin:0; min-width:0}
 .foot .status.pub::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-right:6px; vertical-align:1px}
 .foot .status.sent::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--f-redes); margin-right:6px; vertical-align:1px}
 
+/* Publicaciones */
+.pubgroup{display:grid; gap:10px; margin-bottom:28px}
+.pubgroup h3{font-size:18px; display:flex; align-items:baseline; gap:10px}
+.pubgroup h3 .n{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); font-weight:400}
+ol.publist{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+ol.publist li{display:grid; grid-template-columns:2.4em minmax(0,1fr); gap:4px 12px; padding-block:12px; border-bottom:1px solid var(--line); font-size:15px}
+ol.publist .num{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:3px; font-variant-numeric:tabular-nums}
+ol.publist .cit{min-width:0; overflow-wrap:anywhere}
+ol.publist .cit em{font-style:normal; font-weight:600}
+ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font-size:13px; color:var(--muted)}
+
 /* Herramientas y contacto */
 .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:28px}
 .tool h3{font-size:19px; margin-bottom:8px}
@@ -147,6 +158,8 @@ dl.meta dd{margin:0; min-width:0}
       <div><dt>Análisis en este portafolio</dt><dd>23</dd></div>
       <div><dt>Artículos publicados</dt><dd>7</dd></div>
       <div><dt>Síntesis de evidencia</dt><dd>6</dd></div>
+      <div><dt>Artículos aceptados</dt><dd>8</dd></div>
+      <div><dt>Manuscritos enviados</dt><dd>8</dd></div>
       <div><dt>Fuentes de datos</dt><dd>10</dd></div>
       <div><dt>Familias de métodos</dt><dd>5</dd></div>
       <div><dt>Software</dt><dd>Python · R · Stata</dd></div>
@@ -158,8 +171,9 @@ dl.meta dd{margin:0; min-width:0}
     <a href="#indice"><span class="n">01</span>Fuentes y métodos</a>
     <a href="#analisis"><span class="n">02</span>Análisis estadísticos</a>
     <a href="#sintesis"><span class="n">03</span>Síntesis de evidencia</a>
-    <a href="#herramientas"><span class="n">04</span>Herramientas</a>
-    <a href="#contacto"><span class="n">05</span>Contacto</a>
+    <a href="#publicaciones"><span class="n">04</span>Publicaciones</a>
+    <a href="#herramientas"><span class="n">05</span>Herramientas</a>
+    <a href="#contacto"><span class="n">06</span>Contacto</a>
   </nav>
 
   <section id="indice" aria-labelledby="h-indice">
@@ -184,6 +198,14 @@ dl.meta dd{margin:0; min-width:0}
       <p class="sec-note">Revisiones sistemáticas, protocolos registrados e informes de evaluación de tecnologías sanitarias.</p>
     </div>
     <div class="grid" id="syn"></div>
+  </section>
+
+  <section id="publicaciones" aria-labelledby="h-pub">
+    <div class="sec-head">
+      <h2 id="h-pub">Publicaciones</h2>
+      <p class="sec-note">Artículos de revista según el estado declarado en el currículum, en formato Vancouver.</p>
+    </div>
+    <div id="publist"></div>
   </section>
 
   <section id="herramientas" aria-labelledby="h-herr">
@@ -307,12 +329,12 @@ const A = [
   m:["ADF","Phillips-Perron","KPSS","SARIMA","ETS","Regresión armónica","SARIMAX"],
   r:"Modelo seleccionado: SARIMAX(2,1,2)(0,1,1)₇ con variables de calendario en escala logarítmica, con pronóstico para enero de 2026.",
   sw:"Python (statsmodels)", st:"Métodos, tablas y figuras"},
- {src:"urg", fam:["series"], t:"Urgencias por expresiones de malestar y lesiones autoinfligidas",
+ {src:"urg", fam:["series"], t:"Ideación suicida y autolesiones en urgencias, Chile 2025",
   base:"DEIS, Atenciones de Urgencia 2025, con denominadores del Censo 2024", n:"Series semanales nacionales y conteos regionales",
   d:"Tasas específicas por edad para los códigos R45.8 y X60-X84 y pruebas de tendencia sobre las series semanales.",
   m:["Tasas por edad","Tau de Kendall","Regresión lineal de tendencia"],
   r:"Las urgencias por trastornos mentales en conjunto fueron estables (τ = 0,002; p = 0,98), mientras las dos categorías agudas aumentaron (τ = 0,371; p < 0,001 y τ = 0,235; p = 0,017). Carga proporcionalmente mayor en menores de 15 años.",
-  sw:"Python", st:"Carta al editor adaptada a ARS Medica"},
+  sw:"Python", au:"Autor único", st:"Aceptado en ARS Medica (2027)", stc:"pub"},
  {src:"egr", fam:["series"], t:"Egresos hospitalarios por cáncer de pulmón, 2005-2025",
   base:"DEIS, bases de egresos hospitalarios", n:"70.640 egresos (CIE-10 C33-C34)",
   d:"Serie anual con series complementarias por sexo, edad, letalidad, estancia y previsión. Nueve modelos comparados con validación de origen móvil, con 2020 y 2021 tratados como observaciones faltantes.",
@@ -343,16 +365,16 @@ const A = [
   m:["PSM 1:1 con caliper 0,2 DE","IPTW estabilizado (p1-p99)","WLS doblemente robusto","HC3","Love plots","McNemar"],
   r:"Diferencias ajustadas con IPTW y covariables: dominio físico +1,97 (IC 95 %: 1,22 a 2,72) y psicológico +1,69 (0,93 a 2,45) puntos, bajo el umbral de relevancia clínica. |DME| máxima de 0,436 a 0,020.",
   sw:"Python", st:"Análisis completado"},
- {src:"encavi", fam:["perf","redes"], t:"Enfermedades crónicas, hábitos, vivienda y entorno",
+ {src:"encavi", fam:["perf","redes"], t:"Perfiles de enfermedades crónicas, hábitos, vivienda y entorno residencial",
   base:"ENCAVI 2023-2024",
   d:"Primera versión con red bayesiana discreta (un nodo por enfermedad, aprendizaje estructural con Hill-Climbing, BIC y bootstrap), reemplazada por perfilamiento de datos mixtos con contrastes según multimorbilidad (cero, una, dos o más).",
   m:["Red bayesiana","Hill-Climbing + BIC","FAMD","K-Prototypes"],
-  sw:"Python", st:"Manuscrito para Salud & Ciencia UV", g:"STROBE"},
+  sw:"Python", au:"Autor único", st:"Aceptado en Salud y Ciencia (2027)", stc:"pub", g:"STROBE"},
  {src:"ebs", fam:["redes"], t:"Vivienda, medio ambiente y salud",
   base:"Encuesta de Bienestar Social 2025",
   d:"Red amplia con todos los ítems de vivienda, medio ambiente y salud más nodos sociodemográficos. Descriptivos con diseño muestral complejo, red principal sin ponderar y análisis de sensibilidad ponderado.",
   m:["MGM","Regresiones nodales L1","EBIC","Regla AND","Predictibilidad nodal","Bootstrap","Comunidades"],
-  sw:"Python", st:"Manuscrito para Salud & Ciencia UV", g:"STROBE"},
+  sw:"Python", au:"Autor único", st:"Aceptado en Salud y Ciencia (2027)", stc:"pub", g:"STROBE"},
  {src:"ebs", fam:["redes"], t:"Actividad física, hábitos y distrés psicológico",
   base:"Encuesta de Bienestar Social 2025",
   d:"Red mixta con los cuatro ítems del PHQ-4, nodos de actividad física y hábitos y variables sociodemográficas, con figuras combinadas en paneles.",
@@ -362,7 +384,7 @@ const A = [
   base:"Encuesta de Bienestar Social 2025",
   d:"Exposición en tres niveles (no practica, 1 a 2 y 3 o más veces por semana) y PHQ-4 en cuatro categorías. Covariables del puntaje elegidas por su relación con la exposición, el desenlace o ambos. Asociación ajustada con cinco análisis de sensibilidad.",
   m:["Puntaje de propensión generalizado","IPTW × factor de expansión","Logística ordinal","Bootstrap por conglomerados (300)","E-value"],
-  sw:"Python (statsmodels, networkx)", st:"Manuscrito, suplemento y STROBE para JMH", g:"STROBE"},
+  sw:"Python (statsmodels, networkx)", au:"Autor único", st:"Enviado a Journal of Movement & Health", stc:"sent", g:"STROBE"},
  {src:"casen", fam:["ps"], t:"Inseguridad alimentaria del hogar y exceso de peso infantil: estudio transversal",
   base:"Casen 2024", n:"21.523 niños y niñas de 0 a 9 años",
   d:"Puntaje de propensión ponderado por el diseño muestral, con especificación revisada hasta lograr balance (educación del jefe de hogar e interacciones con quintil de ingreso).",
@@ -374,7 +396,7 @@ const A = [
   d:"Quince nodos sociodemográficos, conductuales y de salud sexual. Variables continuas con transformación nonparanormal y estabilidad evaluada por bootstrap no paramétrico y de eliminación de casos.",
   m:["MGM","EBIC (γ = 0,25)","Nonparanormal","Coeficiente CS","Comunidades"],
   r:"68 de 105 aristas (densidad 0,648), tres comunidades (Q = 0,233) y CS de fuerza 0,80.",
-  sw:"Python (implementación propia)", st:"Enviado a la Revista Chilena de Salud Pública", stc:"sent", g:"STROBE"}
+  sw:"Python (implementación propia)", au:"Autor único", st:"Enviado a la Revista Chilena de Salud Pública", stc:"sent", g:"STROBE"}
 ];
 
 const SYN = [
@@ -383,12 +405,12 @@ const SYN = [
   d:"Cribado independiente por dos revisores en dos etapas y extracción con una ficha de 47 elementos en nueve dominios, clasificando cada elemento crítico para la inferencia causal como reportado, indeterminable o no reportado.",
   m:["Elementos de PRISMA 2020","Rayyan","Ficha de 47 elementos","Hoja de ruta de reporte"],
   r:"82 % especificó el software y reportó análisis de sensibilidad, y 79 % comparó el balance antes y después de ponderar. Solo 32 % declaró el estimando, 29 % estabilizó los pesos, 7 % mencionó supuestos causales y ninguno usó DAG ni compartió su código.",
-  au:"Primer autor (con E. Castañeda y E. Aliaga)", st:"En revisión por pares", stc:"sent"},
+  au:"Primer autor (con E. Castañeda y E. Aliaga)", st:"Enviado a ARS Medica", stc:"sent"},
  {k:"Protocolo de revisión sistemática", t:"Intervenciones de actividad física y calidad de vida en cáncer de pulmón de células no pequeñas",
   base:"CENTRAL, MEDLINE, Embase, PsycINFO, Scopus, Google Scholar y ClinicalTrials.gov",
   d:"Ensayos aleatorizados, estudios cuasi- y no aleatorizados y diseños observacionales controlados en adultos con CPCNP de cualquier estadio. Desenlace primario: calidad de vida relacionada con la salud con instrumentos validados (EORTC QLQ-C30, QLQ-LC13, FACT-L, SF-36 o EQ-5D).",
   m:["PRISMA-P","RoB de Cochrane","ROBINS-I","SWiM","Metanálisis de efectos aleatorios"],
-  au:"Primer autor (con E. Castañeda, E. Aliaga, M. Veas R. e I. Vergara)", st:"Registrado en PROSPERO (CRD420261443769)", stc:"pub"},
+  au:"Primer autor (con M. Veas R., I. Vergara, E. Castañeda y E. Aliaga)", st:"Enviado a ARS Medica · PROSPERO CRD420261443769", stc:"sent"},
  {k:"Protocolo de revisión Cochrane", t:"Intervenciones para mejorar la adherencia a tratamientos basados en ejercicio en personas con artrosis de rodilla",
   base:"Cochrane Database of Systematic Reviews",
   d:"Protocolo de revisión sistemática de intervenciones elaborado con la metodología Cochrane.",
@@ -398,7 +420,7 @@ const SYN = [
   base:"Cinco bases de datos", n:"16 estudios de 15 países",
   d:"Búsqueda exhaustiva con criterios de elegibilidad explícitos, cribado triple y síntesis narrativa y tabular, encuadrada como systematic search and review según la tipología de Grant y Booth.",
   m:["Systematic search and review","Marco SALSA","SANRA"],
-  au:"Coautor", st:"Aceptado en Revista Hospital Clínico Universidad de Chile (2026)", stc:"pub"},
+  au:"Primer autor (con M. Veas R. e I. Vergara)", st:"Aceptado en Revista Hospital Clínico Universidad de Chile (2027)", stc:"pub"},
  {k:"Informe de síntesis de evidencia", t:"Deprescripción de antidepresivos",
   base:"Cochrane Iberoamérica para Avalia-t (ACIS, Galicia)",
   d:"Informe para la evaluación de tecnologías sanitarias impulsado por el Ministerio de Sanidad de España.",
@@ -471,6 +493,49 @@ function renderCards(){
     </article>`).join("");
 }
 
+const PUBS = [
+ {g:"Publicados", items:[
+  {c:"González-Torres C, Castañeda E, Veas R M, Vergara I. Asociación entre niveles de actividad física y calidad de vida en los dominios del WHOQOL-BREF: un análisis multivariable en población adulta chilena.", j:"J Mov Health. 2027;24(1):1-12", doi:"10.5027/jmh-Vol24-Issue1(2027)art298", note:"Disponible en línea desde el 23 de septiembre de 2026"},
+  {c:"González-Torres C, Castañeda E, Veas R M, Vergara I. Asociación entre actividad física, áreas verdes y distrés psicológico en la población chilena: análisis de la Encuesta de Bienestar Social 2023.", j:"J Mov Health. 2026;23(2):1-16", doi:"10.5027/jmh-Vol23-Issue2(2026)art290"},
+  {c:"González-Torres C, Lera L, Lizana PA. Association between obesity and psychological distress in the Chilean population during the COVID-19 pandemic: Social Wellbeing Survey 2021.", j:"PLoS One. 2025;20(11):e0333697", doi:"10.1371/journal.pone.0333697"},
+  {c:"González Aroca J, Vergara-Merino L, Meza N, González-Torres C, Ramírez Araya P, Muñoz SR, Madrid E. Interventions for improving adherence to exercise-based treatments in people with knee osteoarthritis (protocolo).", j:"Cochrane Database Syst Rev. 2025;(7):CD016088", doi:"10.1002/14651858.CD016088"},
+  {c:"González-Torres C, Lizana PA. Association between infrastructures and perceptions of neighbors with quality of life in the Chilean population: results from ENCAVI 2015-2016.", j:"Cities. 2024;152:105128", doi:"10.1016/j.cities.2024.105128"},
+  {c:"Vega-Fernández G, Gonzalez-Torres C, Solis-Soto MT, Lizana PA. Musculoskeletal disorders and quality of life for Chilean teachers during the COVID-19 pandemic at the academic year-end.", j:"Front Public Health. 2024;12:1277578", doi:"10.3389/fpubh.2024.1277578"},
+  {c:"Gonzalez-Torres C, Yuing T, Berral-de la Rosa F, Lizana PA. Physical inactivity, sedentary behavior and quality of life in the Chilean population: ENCAVI results, 2015-2016.", j:"Healthcare (Basel). 2023;11(7):1020", doi:"10.3390/healthcare11071020", note:"Tesis de Licenciatura en Biología (PUCV)"}
+ ]},
+ {g:"Aceptados", items:[
+  {c:"González-Torres C, Veas R M, Vergara I. Academic Entitlement en estudiantes de educación superior del área de la salud: una revisión narrativa con búsqueda sistemática.", j:"Rev Hosp Clín Univ Chile. 2027", note:"LILACS"},
+  {c:"González-Torres C. Vivienda, medio ambiente y salud en la población adulta chilena: análisis de redes mediante modelos gráficos mixtos en la Encuesta de Bienestar Social 2025.", j:"Salud y Ciencia. 2027"},
+  {c:"González-Torres C. Perfiles poblacionales de enfermedades crónicas no transmisibles, hábitos, características sociodemográficas, vivienda y entorno residencial en Chile: análisis factorial de datos mixtos y conglomerados por K-Prototypes en la ENCAVI 2023-2024.", j:"Salud y Ciencia. 2027"},
+  {c:"González-Torres C. Ideación suicida y autolesiones, Chile 2025.", j:"ARS Medica. 2027", note:"SciELO"},
+  {c:"González-Torres C. Emulación de ensayos objetivo: la causalidad empieza en la ficha clínica.", j:"ARS Medica. 2027", note:"SciELO"},
+  {c:"González-Torres C, Castañeda E, Aliaga E. Leisure screen time, digital leisure and physical activity in the Chilean population: a nationally representative analysis of the 2023-2024 National Quality of Life and Health Survey.", j:"J Mov Health. 2026", note:"Latindex"},
+  {c:"González-Torres C. Social support: the missing covariate in non-small cell lung cancer.", j:"ARS Medica. 2026", note:"SciELO"},
+  {c:"González-Torres C. Sequential Mixed Methods Profiling: a framework for anchoring qualitative inquiry in empirically derived population profiles.", j:"ARS Medica. 2026", note:"SciELO"}
+ ]},
+ {g:"Enviados", items:[
+  {c:"González-Torres C, Veas R M, Vergara I, Castañeda E, Aliaga E. Efecto de las intervenciones de actividad física sobre la calidad de vida en pacientes con cáncer de pulmón de células no pequeñas: protocolo de una revisión sistemática.", j:"ARS Medica", note:"PROSPERO CRD420261443769"},
+  {c:"González-Torres C, Castañeda E, Aliaga E. Uso y reporte de la ponderación por probabilidad inversa de tratamiento (IPTW) en la emulación de ensayos clínicos en cáncer de pulmón de células no pequeñas tratado con inhibidores de tirosina quinasa: revisión sistemática metodológica.", j:"ARS Medica"},
+  {c:"González-Torres C, Castañeda E, Aliaga E. Perfiles de actividad física, calidad de vida y trabajo infantil en niños, niñas y adolescentes de Chile.", j:"ARS Medica"},
+  {c:"González-Torres C. Correlatos de la actividad física y la conducta sedentaria en población chilena: un análisis de redes.", j:"Rev Chil Salud Pública"},
+  {c:"González-Torres C. Estructura de red de las conductas sexuales de riesgo y las infecciones de transmisión sexual en personas adultas de Chile.", j:"Rev Chil Salud Pública"},
+  {c:"González Aroca J, Rivera R, González-Torres C. Estudios de casos y controles anidados en cohortes: claves para su correcta identificación.", j:"Nutr Hosp"},
+  {c:"González-Torres C, Veas R M, Vergara I, Castañeda E, Aliaga E. Perfiles de salud oral en población chilena adulta: análisis factorial de datos mixtos y agrupamiento no supervisado a partir de la Encuesta Nacional de Calidad de Vida y Salud 2023-2024.", j:"Salud y Ciencia"},
+  {c:"González-Torres C. Práctica de deporte fuera del horario de trabajo y distrés psicológico en adultos chilenos: estudio transversal con ponderación por puntaje de propensión, Encuesta de Bienestar Social 2025.", j:"J Mov Health"}
+ ]}
+];
+function renderPubs(){
+  let n = 0;
+  document.getElementById("publist").innerHTML = PUBS.map(grp => `
+    <div class="pubgroup">
+      <h3>${esc(grp.g)} <span class="n">${grp.items.length}</span></h3>
+      <ol class="publist">${grp.items.map(it => { n++; return `
+        <li><span class="num">${String(n).padStart(2,"0")}</span>
+          <span class="cit">${esc(it.c)} <em>${esc(it.j)}.</em></span>
+          <span class="tags">${it.doi ? `<a class="doi" href="https://doi.org/${esc(it.doi)}" target="_blank" rel="noopener">doi.org/${esc(it.doi)}</a>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}</span>
+        </li>`; }).join("")}</ol>
+    </div>`).join("");
+}
 function renderSyn(){
   document.getElementById("syn").innerHTML = SYN.map(a => `
     <article class="card">
@@ -494,6 +559,7 @@ function renderSyn(){
 }
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
 renderSyn();
+renderPubs();
 (function(){
   const links = [...document.querySelectorAll("nav.sections a")];
   const mark = id => links.forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("on", on); on ? a.setAttribute("aria-current","true") : a.removeAttribute("aria-current"); });
