@@ -78,6 +78,21 @@ section{scroll-margin-top:64px}
 .tmeta dt{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
 .tmeta dd{margin:2px 0 0; font-size:14.5px}
 
+/* Destacados */
+.feat{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr)); gap:18px}
+.feat article{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:22px; display:flex; flex-direction:column; gap:10px; min-width:0; box-shadow:var(--shadow)}
+.feat .kicker{font-family:var(--f-mono); font-size:12px; letter-spacing:.04em; color:var(--accent); text-transform:uppercase}
+.feat h3{font-size:22px; line-height:1.22}
+.feat .why{font-size:14.5px; color:var(--muted); margin:0}
+.feat .big{display:flex; flex-wrap:wrap; gap:6px 22px; padding-block:6px; border-block:1px solid var(--line)}
+.feat .big div{display:flex; flex-direction:column; min-width:0}
+.feat .big b{font-family:var(--f-display); font-size:26px; font-weight:600; font-variant-numeric:tabular-nums; line-height:1.1}
+.feat .big span{font-size:12.5px; color:var(--muted)}
+.feat .go{margin-top:auto; font-weight:600; font-size:14px}
+.more-wrap{display:flex; justify-content:center; margin-top:20px}
+.more{font:inherit; font-weight:700; font-size:14.5px; padding:10px 20px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; box-shadow:var(--shadow)}
+.more:hover{box-shadow:var(--shadow-hi)}
+
 /* Secciones */
 section{padding-block:44px 0}
 .sec-head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px 24px; margin-bottom:18px}
@@ -184,6 +199,7 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
   </header>
 
   <nav class="sections" aria-label="Secciones del portafolio">
+    <a href="#destacados"><span class="n">★</span>Destacados</a>
     <a href="#indice"><span class="n">01</span>Fuentes y métodos</a>
     <a href="#analisis"><span class="n">02</span>Análisis estadísticos</a>
     <a href="#sintesis"><span class="n">03</span>Síntesis de evidencia</a>
@@ -213,6 +229,43 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
     </dl>
   </section>
 
+  <section id="destacados" aria-labelledby="h-dest">
+    <div class="sec-head">
+      <h2 id="h-dest">Trabajos destacados</h2>
+      <p class="sec-note">Cuatro trabajos que resumen mi línea: encuestas poblacionales, registros de cáncer y métodos para evidencia del mundo real.</p>
+    </div>
+    <div class="feat">
+      <article>
+        <span class="kicker">PLOS ONE · 2025 · Primer autor</span>
+        <h3>Obesidad y distrés psicológico durante la pandemia de COVID-19</h3>
+        <p class="why">Encuesta de Bienestar Social 2021. Regresión logística en ambas direcciones para explorar una relación bidireccional entre ambas condiciones.</p>
+        <div class="big"><div><b>10.395</b><span>adultos</span></div><div><b>OR 1,3</b><span>obesidad y distrés grave</span></div><div><b>OR 1,4</b><span>distrés grave y obesidad</span></div></div>
+        <a class="go" href="https://doi.org/10.1371/journal.pone.0333697" target="_blank" rel="noopener">Leer el artículo</a>
+      </article>
+      <article>
+        <span class="kicker">Journal of Movement &amp; Health · 2026 · Primer autor</span>
+        <h3>Actividad física y calidad de vida en los cuatro dominios del WHOQOL-BREF</h3>
+        <p class="why">ENCAVI 2023-2024. Regresión lineal multivariada que muestra un gradiente ascendente de calidad de vida según el nivel de actividad física.</p>
+        <div class="big"><div><b>16.590</b><span>participantes</span></div><div><b>4 de 4</b><span>dominios con gradiente (p &lt; 0,05)</span></div></div>
+        <a class="go" href="https://doi.org/10.5027/jmh-Vol24-Issue1(2027)art298" target="_blank" rel="noopener">Leer el artículo</a>
+      </article>
+      <article>
+        <span class="kicker">III Jornada de Registros de Cáncer · 2026</span>
+        <h3>Tipología de casos incidentes en los registros poblacionales de cáncer de Chile</h3>
+        <p class="why">Registro Poblacional de Cáncer 1998-2019. Análisis factorial de datos mixtos y K-medias para describir perfiles de casos en seis registros regionales.</p>
+        <div class="big"><div><b>80.890</b><span>casos incidentes</span></div><div><b>5</b><span>conglomerados</span></div></div>
+        <a class="go" href="#analisis">Ver la ficha del análisis</a>
+      </article>
+      <article>
+        <span class="kicker">Revisión sistemática metodológica · Enviada a ARS Medica</span>
+        <h3>Uso y reporte de IPTW en emulaciones de ensayos con datos del mundo real en CPCNP</h3>
+        <p class="why">Trabajo preliminar de la tesis. Mostró que la ejecución técnica suele ser adecuada, pero la fundamentación causal es débil, y orienta las decisiones de diseño del proyecto doctoral.</p>
+        <div class="big"><div><b>28</b><span>estudios incluidos</span></div><div><b>32 %</b><span>declaró el estimando</span></div><div><b>0</b><span>usaron DAG o compartieron código</span></div></div>
+        <a class="go" href="#sintesis">Ver en síntesis de evidencia</a>
+      </article>
+    </div>
+  </section>
+
   <section id="indice" aria-labelledby="h-indice">
     <div class="sec-head">
       <h2 id="h-indice">Fuentes de datos y métodos</h2>
@@ -227,6 +280,7 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
     </div>
     <div class="filters" id="filters" role="toolbar" aria-label="Filtrar por familia de métodos"></div>
     <div class="grid" id="grid"></div>
+    <div class="more-wrap" id="moreWrap"><button class="more" id="more" type="button"></button></div>
   </section>
 
   <section id="sintesis" aria-labelledby="h-sint">
@@ -478,7 +532,8 @@ const SYN = [
   au:"Colaborador", st:"Participación en el informe"}
 ];
 A.sort((a,b) => (b.stc === "pub" ? b.y : 0) - (a.stc === "pub" ? a.y : 0));
-const state = {fam:null, src:null, pub:false};
+const state = {fam:null, src:null, pub:false, all:false};
+const LIMIT = 6;
 const grid = document.getElementById("grid");
 const filters = document.getElementById("filters");
 const matrix = document.getElementById("matrix");
@@ -516,7 +571,15 @@ function visible(){
 }
 
 function renderCards(){
-  grid.innerHTML = visible().map(a => `
+  const list = visible();
+  const limited = !state.fam && !state.src && !state.pub && !state.all;
+  const shown = limited ? list.slice(0, LIMIT) : list;
+  const mw = document.getElementById("moreWrap"), mb = document.getElementById("more");
+  const unfiltered = !state.fam && !state.src && !state.pub;
+  mw.hidden = !unfiltered;
+  mb.textContent = state.all ? "Mostrar menos" : `Ver los ${list.length} análisis`;
+  mb.setAttribute("aria-expanded", String(state.all));
+  grid.innerHTML = shown.map(a => `
     <article class="card">
       <div class="card-top">
         <span class="idx">N.º ${String(a.i + 1).padStart(2,"0")}</span>
@@ -633,6 +696,10 @@ function renderSyn(){
     </article>`).join("");
 }
 function render(){ renderMatrix(); renderFilters(); renderCards(); }
+document.getElementById("more").addEventListener("click", () => {
+  state.all = !state.all; renderCards();
+  if (!state.all) document.getElementById("analisis").scrollIntoView({behavior:"auto"});
+});
 renderSyn();
 renderPubs();
 renderSw();
