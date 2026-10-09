@@ -122,6 +122,7 @@ ol.publist li{display:grid; grid-template-columns:2.4em minmax(0,1fr); gap:4px 1
 ol.publist .num{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:3px; font-variant-numeric:tabular-nums}
 ol.publist .cit{min-width:0; overflow-wrap:anywhere}
 ol.publist .cit em{font-style:normal; font-weight:600}
+ol.publist .tags em{font-style:normal; font-weight:600; color:var(--ink)}
 ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font-size:13px; color:var(--muted)}
 
 /* Herramientas y contacto */
@@ -523,15 +524,15 @@ const PUBS = [
   {c:"González-Torres C. Social support: the missing covariate in non-small cell lung cancer.", j:"ARS Medica. 2026", note:"SciELO"},
   {c:"González-Torres C. Sequential Mixed Methods Profiling: a framework for anchoring qualitative inquiry in empirically derived population profiles.", j:"ARS Medica. 2026", note:"SciELO"}
  ]},
- {g:"Enviados", items:[
-  {c:"González-Torres C, Veas R M, Vergara I, Castañeda E, Aliaga E. Efecto de las intervenciones de actividad física sobre la calidad de vida en pacientes con cáncer de pulmón de células no pequeñas: protocolo de una revisión sistemática.", j:"ARS Medica", note:"PROSPERO CRD420261443769"},
-  {c:"González-Torres C, Castañeda E, Aliaga E. Uso y reporte de la ponderación por probabilidad inversa de tratamiento (IPTW) en la emulación de ensayos clínicos en cáncer de pulmón de células no pequeñas tratado con inhibidores de tirosina quinasa: revisión sistemática metodológica.", j:"ARS Medica"},
-  {c:"González-Torres C, Castañeda E, Aliaga E. Perfiles de actividad física, calidad de vida y trabajo infantil en niños, niñas y adolescentes de Chile.", j:"ARS Medica"},
-  {c:"González-Torres C. Correlatos de la actividad física y la conducta sedentaria en población chilena: un análisis de redes.", j:"Rev Chil Salud Pública"},
-  {c:"González-Torres C. Estructura de red de las conductas sexuales de riesgo y las infecciones de transmisión sexual en personas adultas de Chile.", j:"Rev Chil Salud Pública"},
-  {c:"González Aroca J, Rivera R, González-Torres C. Estudios de casos y controles anidados en cohortes: claves para su correcta identificación.", j:"Nutr Hosp"},
+ {g:"Enviados", below:true, items:[
+  {c:"González-Torres C, Veas R M, Vergara I, Castañeda E, Aliaga E. Efecto de las intervenciones de actividad física sobre la calidad de vida en pacientes con cáncer de pulmón de células no pequeñas: protocolo de una revisión sistemática.", j:"ARS Medica", idx:"SciELO", note:"PROSPERO CRD420261443769"},
+  {c:"González-Torres C, Castañeda E, Aliaga E. Uso y reporte de la ponderación por probabilidad inversa de tratamiento (IPTW) en la emulación de ensayos clínicos en cáncer de pulmón de células no pequeñas tratado con inhibidores de tirosina quinasa: revisión sistemática metodológica.", j:"ARS Medica", idx:"SciELO"},
+  {c:"González-Torres C, Castañeda E, Aliaga E. Perfiles de actividad física, calidad de vida y trabajo infantil en niños, niñas y adolescentes de Chile.", j:"ARS Medica", idx:"SciELO"},
+  {c:"González-Torres C. Correlatos de la actividad física y la conducta sedentaria en población chilena: un análisis de redes.", j:"Revista Chilena de Salud Pública", idx:"Latindex"},
+  {c:"González-Torres C. Estructura de red de las conductas sexuales de riesgo y las infecciones de transmisión sexual en personas adultas de Chile.", j:"Revista Chilena de Salud Pública", idx:"Latindex"},
+  {c:"González Aroca J, Rivera R, González-Torres C. Estudios de casos y controles anidados en cohortes: claves para su correcta identificación.", j:"Nutrición Hospitalaria", idx:"WoS"},
   {c:"González-Torres C, Veas R M, Vergara I, Castañeda E, Aliaga E. Perfiles de salud oral en población chilena adulta: análisis factorial de datos mixtos y agrupamiento no supervisado a partir de la Encuesta Nacional de Calidad de Vida y Salud 2023-2024.", j:"Salud y Ciencia"},
-  {c:"González-Torres C. Práctica de deporte fuera del horario de trabajo y distrés psicológico en adultos chilenos: estudio transversal con ponderación por puntaje de propensión, Encuesta de Bienestar Social 2025.", j:"J Mov Health"}
+  {c:"González-Torres C. Práctica de deporte fuera del horario de trabajo y distrés psicológico en adultos chilenos: estudio transversal con ponderación por puntaje de propensión, Encuesta de Bienestar Social 2025.", j:"Journal of Movement & Health", idx:"Latindex"}
  ]}
 ];
 function renderPubs(){
@@ -541,8 +542,8 @@ function renderPubs(){
       <h3>${esc(grp.g)} <span class="n">${grp.items.length}</span></h3>
       <ol class="publist">${grp.items.map(it => { n++; return `
         <li><span class="num">${String(n).padStart(2,"0")}</span>
-          <span class="cit">${esc(it.c)} <em>${esc(it.j)}.</em></span>
-          <span class="tags">${it.doi ? `<a class="doi" href="https://doi.org/${esc(it.doi)}" target="_blank" rel="noopener">doi.org/${esc(it.doi)}</a>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}</span>
+          <span class="cit">${esc(it.c)}${grp.below ? "" : ` <em>${esc(it.j)}.</em>`}</span>
+          <span class="tags">${grp.below ? `<span><em>${esc(it.j)}</em>${it.idx ? " · " + esc(it.idx) : ""}</span>` : ""}${it.doi ? `<a class="doi" href="https://doi.org/${esc(it.doi)}" target="_blank" rel="noopener">doi.org/${esc(it.doi)}</a>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}</span>
         </li>`; }).join("")}</ol>
     </div>`).join("");
 }
