@@ -51,8 +51,8 @@ h1{font-size:clamp(36px,5.4vw,60px); font-weight:600; line-height:1.04; letter-s
 .facts dd{margin:0; font-family:var(--f-mono); font-variant-numeric:tabular-nums; text-align:right}
 
 /* Navegación entre secciones */
-nav.sections{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:10px; padding-block:14px}
-nav.sections a{display:inline-flex; align-items:center; gap:8px; color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:600; padding:9px 16px; border-radius:8px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+nav.sections{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:8px; padding-block:12px}
+nav.sections a{display:inline-flex; align-items:center; gap:7px; color:var(--ink); text-decoration:none; font-size:14px; font-weight:600; padding:8px 12px; border-radius:8px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
 nav.sections a .n{font-family:var(--f-mono); font-size:11.5px; font-weight:500; color:var(--muted)}
 nav.sections a.on{background:var(--accent); border-color:var(--accent); color:var(--on-accent); box-shadow:var(--shadow-hi)}
 nav.sections a.on .n{color:var(--on-accent); opacity:.8}
@@ -67,13 +67,18 @@ section{scroll-margin-top:64px}
 /* Tesis doctoral */
 .thesis{margin-top:32px; background:var(--surface); border:1px solid var(--line); border-top:4px solid var(--accent); border-radius:8px; padding:clamp(20px,3vw,32px); display:grid; gap:20px; box-shadow:var(--shadow)}
 .thesis .eyebrow{margin:0}
-.thesis h2{font-size:clamp(22px,2.8vw,30px); line-height:1.2; max-width:52ch}
+.thesis h2{font-size:clamp(22px,2.6vw,30px); line-height:1.2}
+.ttop{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:clamp(20px,3vw,44px); align-items:start}
+.tleft{display:grid; gap:16px; min-width:0}
+.tright{min-width:0; background:var(--soft); border-radius:8px; padding:16px 18px}
+.tright .tmeta div:first-child{border-top:0; padding-top:0}
+@media (max-width:900px){ .ttop{grid-template-columns:1fr} }
 .thesis p{margin:0; max-width:75ch}
 .flow{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr)); gap:10px; counter-reset:paso}
 .flow li{counter-increment:paso; background:var(--soft); border-radius:6px; padding:12px 14px; font-size:14px; min-width:0}
 .flow li::before{content:"Paso " counter(paso); display:block; font-family:var(--f-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:4px}
 .flow li b{display:block; font-size:15px; margin-bottom:2px}
-.tmeta{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:14px 28px; margin:0}
+.tmeta{display:grid; grid-template-columns:1fr; gap:12px; margin:0}
 .tmeta div{border-top:1px solid var(--line); padding-top:8px; min-width:0}
 .tmeta dt{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
 .tmeta dd{margin:2px 0 0; font-size:14.5px}
@@ -210,23 +215,29 @@ ol.publist .tags{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 14px; font
   </nav>
 
   <section id="tesis" class="thesis" aria-labelledby="h-tesis">
-    <p class="eyebrow">Tesis doctoral en curso · Doctorado en Ciencias e Ingeniería para la Salud, Universidad de Valparaíso</p>
-    <h2 id="h-tesis">Desarrollo de un sistema de emulación de ensayos clínicos aleatorizados en oncología a partir de registros observacionales: aplicación a la efectividad clínica y costo-efectividad reales del medicamento de alto costo Afatinib en cáncer de pulmón en Chile</h2>
-    <p>Las decisiones de cobertura de los medicamentos oncológicos de alto costo en Chile se apoyan sobre todo en ensayos aleatorizados internacionales, cuyas poblaciones difieren de los pacientes atendidos en la práctica habitual en edad, comorbilidades, fragilidad y adherencia. La tesis aplica Target Trial Emulation a registros clínicos de tres centros chilenos para estimar la efectividad comparativa y la costo-efectividad de Afatinib frente a quimioterapia basada en platino en primera línea de cáncer de pulmón de células no pequeñas avanzado con mutación sensibilizante de EGFR.</p>
+    <div class="ttop">
+      <div class="tleft">
+        <p class="eyebrow">Tesis doctoral en curso · Doctorado en Ciencias e Ingeniería para la Salud, Universidad de Valparaíso</p>
+        <h2 id="h-tesis">Desarrollo de un sistema de emulación de ensayos clínicos aleatorizados en oncología a partir de registros observacionales: aplicación a la efectividad clínica y costo-efectividad reales del medicamento de alto costo Afatinib en cáncer de pulmón en Chile</h2>
+        <p>Las decisiones de cobertura de los medicamentos oncológicos de alto costo en Chile se apoyan sobre todo en ensayos aleatorizados internacionales, cuyas poblaciones difieren de los pacientes atendidos en la práctica habitual en edad, comorbilidades, fragilidad y adherencia. La tesis aplica Target Trial Emulation a registros clínicos de tres centros chilenos para estimar la efectividad comparativa y la costo-efectividad de Afatinib frente a quimioterapia basada en platino en primera línea de cáncer de pulmón de células no pequeñas avanzado con mutación sensibilizante de EGFR.</p>
+      </div>
+      <div class="tright">
+        <dl class="tmeta">
+          <div><dt>Comparación</dt><dd>Afatinib frente a quimioterapia basada en platino, primera línea</dd></div>
+          <div><dt>Centros</dt><dd>Fundación Arturo López Pérez, Hospital Carlos Van Buren y Hospital San Juan de Dios</dd></div>
+          <div><dt>Cohorte</dt><dd>Pacientes diagnosticados entre 2019 y 2024; cohorte elegible estimada de 210 a 240 pacientes con EGFR+</dd></div>
+          <div><dt>Desenlaces</dt><dd>Supervivencia libre de progresión, supervivencia global y costo-efectividad desde la perspectiva del sistema de salud</dd></div>
+          <div><dt>Dirección</dt><dd>Dra. Eva Madrid (guía); Dr. Jean-Gabriel Minonzio y Dr. Leonel Muñoz (co-guías)</dd></div>
+          <div><dt>Productos</dt><dd>Evidencia local para decisiones clínicas y de cobertura, la aplicación Target Trial Facilitator y una caja de herramientas metodológicas replicable</dd></div>
+        </dl>
+      </div>
+    </div>
     <ol class="flow">
       <li><b>Protocolo del ensayo objetivo</b>Población elegible, tiempo cero, estrategias comparadas, desenlaces y seguimiento definidos antes del análisis.</li>
       <li><b>Emulación con datos reales</b>Registros clínicos y administrativos preexistentes, sin intervención sobre pacientes.</li>
       <li><b>Análisis principal</b>Puntaje de propensión (emparejamiento e IPTW) con modelos de Cox estratificados por centro.</li>
       <li><b>Robustez y valor económico</b>Double Machine Learning para supervivencia y tiempo medio de supervivencia restringido (RMST) como insumo de costo-efectividad.</li>
     </ol>
-    <dl class="tmeta">
-      <div><dt>Comparación</dt><dd>Afatinib frente a quimioterapia basada en platino, primera línea</dd></div>
-      <div><dt>Centros</dt><dd>Fundación Arturo López Pérez, Hospital Carlos Van Buren y Hospital San Juan de Dios</dd></div>
-      <div><dt>Cohorte</dt><dd>Pacientes diagnosticados entre 2019 y 2024; cohorte elegible estimada de 210 a 240 pacientes con EGFR+</dd></div>
-      <div><dt>Desenlaces</dt><dd>Supervivencia libre de progresión, supervivencia global y costo-efectividad desde la perspectiva del sistema de salud</dd></div>
-      <div><dt>Dirección</dt><dd>Dra. Eva Madrid (guía); Dr. Jean-Gabriel Minonzio y Dr. Leonel Muñoz (co-guías)</dd></div>
-      <div><dt>Productos</dt><dd>Evidencia local para decisiones clínicas y de cobertura, la aplicación Target Trial Facilitator y una caja de herramientas metodológicas replicable</dd></div>
-    </dl>
   </section>
 
   <section id="destacados" aria-labelledby="h-dest">
